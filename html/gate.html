@@ -1,0 +1,22 @@
+<!DOCTYPE html><html lang="pt"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Acesso LABRATS</title>
+<link rel="stylesheet" href="/css/styleHome.css">
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="theme-color" content="#0A67B2">
+</head><body>
+<main class="list" style="max-width:420px;margin:20vh auto;text-align:center">
+  <h1>LABRATS</h1>
+  <p>Introduz a palavra-passe para entrar</p>
+  <input id="pw" type="password" placeholder="Password" style="padding:12px;width:100%;max-width:280px;border:2px solid #0A67B2;border-radius:8px">
+  <button class="btn-cycle" style="margin-top:12px" onclick="go()">Entrar</button>
+</main>
+<script>
+  const PASS = "labrats2025";           // <— muda aqui
+  function go(){
+    const ok = document.getElementById('pw').value === PASS;
+    if(ok){ localStorage.setItem('LABRATS_OK','1'); location.href='/html/home.html'; }
+    else alert('Senha inválida');
+  }
+</script>
+</body></html>

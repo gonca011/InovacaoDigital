@@ -1,0 +1,76 @@
+/* ===== RESET ===== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #D8ECFF; /* Azul clarinho do Figma */
+  color: #0E1B24;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ===== MAIN CONTAINER ===== */
+main {
+  text-align: center;
+  width: 100%;
+  max-width: 480px;
+  padding: 20px;
+}
+
+/* ===== LOGO ===== */
+.logo {
+  width: 180px;      /* ajusta o tamanho conforme precisares */
+  height: auto;
+  margin-bottom: 30px;
+}
+
+/* ===== BOTÕES ===== */
+button {
+  display: block;
+  width: 200px;
+  margin: 10px auto;
+  padding: 14px 20px;
+  background-color: #0A67B2;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+button:hover {
+  background-color: #095b9c;
+}
+
+/* ===== SECTIONS ===== */
+section {
+  display: none; /* todas começam escondidas */
+}
+
+/* apenas a secção visível */
+section:not(.hidden) {
+  display: block;
+}
+
+/* ===== HIDDEN CLASS ===== */
+.hidden {
+  display: none !important;
+}
+
+/* ===== CAMPOS DE INPUT ===== */
+input[type="email"] {
+  padding: 10px;
+  border: 2px solid #0A67B2;
+  border-radius: 6px;
+  width: 80%;
+  margin-bottom: 20px;
+  font-size: 16px;
+}

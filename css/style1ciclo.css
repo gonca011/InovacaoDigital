@@ -1,0 +1,97 @@
+/* ===== BASE ===== */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; }
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #D8ECFF; /* azul claro */
+  color: #0E1B24;
+}
+
+/* ===== LAYOUT ===== */
+.screen {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto; /* topo | lista | barra inferior */
+}
+
+/* topo com título */
+.top {
+  padding: 16px;
+  text-align: center;
+}
+
+.top h1 {
+  margin: 0;
+  font-size: 30px;                  /* ligeiramente maior */
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: #0A67B2;                   /* azul principal */
+  font-family: "Poppins", "Comic Sans MS", cursive; /* mais simpática e arredondada */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.15);     /* leve sombra para destacar */
+}
+
+
+/* lista de temas */
+.list {
+  display: grid;
+  gap: 18px;
+  padding: 8px 16px 24px;
+  align-content: start;
+  justify-items: center;
+}
+.btn-topic {
+  width: 100%;
+  max-width: 360px;
+  height: 56px;
+  border-radius: 12px;
+  background-color: #0A67B2;
+  color: #fff;
+  border: none;
+  font-weight: 800;
+  letter-spacing: 1px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: opacity .2s ease;
+}
+.btn-topic:hover { opacity: .9; }
+
+/* barra inferior com casa centrada e “a sair” para cima */
+.bottombar {
+  position: sticky;
+  bottom: 0;
+  background: #FFF7D1;
+  height: 64px;
+  border-top: 1px solid rgba(0,0,0,.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 -2px 6px rgba(0,0,0,.04);
+  z-index: 10;
+}
+.home-btn {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+.home-ring {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 999px;
+  background: #FFF7D1;
+  border: 6px solid #0A67B2;
+  box-shadow: 0 4px 0 rgba(0,0,0,.05);
+}
+.home-icon { width: 24px; height: 24px; fill: #EE8F59; }
+
+/* responsivo leve */
+@media (min-width: 480px) {
+  .btn-topic { height: 60px; }
+  .home-ring { width: 54px; height: 54px; }
+}
