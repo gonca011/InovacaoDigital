@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LABRATS - Aluno</title>
+  <link rel="stylesheet" href="/css/styleAluno.css" />
+</head>
+<body>
+  <div class="screen">
+
+    <!-- HEADER DO ALUNO -->
+    <header class="top student-top">
+      <div class="student-id">
+        <div class="student-avatar">AF</div>
+        <div>
+          <h1 class="student-name">Ana Ferreira</h1>
+          <p class="student-line">4º ano · Centro de Estudos “Aprender+”</p>
+        </div>
+      </div>
+    </header>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main class="student-main">
+
+      <!-- Próxima explicação -->
+      <section class="card next-lesson-card">
+        <h2 class="card-title">Próxima explicação</h2>
+        <p class="next-lesson-when">amanhã, 17:30</p>
+        <p class="next-lesson-subject">Matemática · Preparação de teste</p>
+        <p class="next-lesson-center">Centro “Aprender+” · Sala 2</p>
+      </section>
+
+      <!-- Conteúdos do 5º ano -->
+      <section class="card year-content-card">
+        <h2 class="card-title">Conteúdos de 4º ano</h2>
+        <p class="card-subtitle">
+          Atalhos rápidos sem saíres desta página.
+        </p>
+        <div class="year-content-grid">
+          <button class="content-chip" onclick="location.href='conteudos.html?ano=4&disciplina=Matemática'">
+            📐 Matemática
+          </button>
+          <button class="content-chip" onclick="location.href='conteudos.html?ano=4&disciplina=Português'">
+            📖 Português
+          </button>
+          <button class="content-chip" onclick="location.href='conteudos.html?ano=4&disciplina=Estudo do Meio'">
+            🌍 Estudo do Meio
+          </button>
+          <button class="content-chip" onclick="location.href='conteudos.html?ano=4&disciplina=Inglês'">
+            🇬🇧 Inglês
+          </button>
+        </div>
+      </section>
+
+      <!-- Jogo diário -->
+      <section class="card daily-game-card">
+        <div class="daily-game-header">
+          <h2 class="card-title">Jogo diário</h2>
+          <span class="daily-tag">Novo de hoje</span>
+        </div>
+        <p class="card-subtitle">
+          Desafio de hoje: somar e subtrair frações com o mesmo denominador.
+        </p>
+        <button class="btn-play" onclick="location.href='jogoDiario.html'">
+          ▶ Jogar agora
+        </button>
+      </section>
+
+    </main>
+
+    <!-- LOW BAR / NAV INFERIOR -->
+    <nav class="bottom-nav">
+      <!-- Conteúdos gerais -->
+      <button class="nav-btn" onclick="location.href='conteudos.html'">
+        <span class="nav-icon">📚</span>
+        <span class="nav-label">Conteúdos</span>
+      </button>
+
+      <!-- Centro de estudos -->
+      <button class="nav-btn" onclick="location.href='centro.html'">
+        <span class="nav-icon">🏫</span>
+        <span class="nav-label">Centro</span>
+      </button>
+
+      <!-- Perfil do aluno (página atual) -->
+      <button class="nav-btn nav-btn-main active" onclick="location.href='aluno.html'">
+        <span class="nav-icon">👤</span>
+      </button>
+
+      <!-- Mensagens -->
+      <button class="nav-btn" onclick="location.href='mensagens.html'">
+        <span class="nav-icon">💬</span>
+        <span class="nav-label">Mensagens</span>
+      </button>
+
+      <!-- Definições -->
+      <button class="nav-btn" onclick="location.href='definicoes.html'">
+        <span class="nav-icon">⚙️</span>
+        <span class="nav-label">Definições</span>
+      </button>
+    </nav>
+
+  </div>
+</body>
+</html>

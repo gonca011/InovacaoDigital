@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mensagens</title>
+  <link rel="stylesheet" href="/css/styleMenssagens.css" />
+</head>
+<body>
+  <div class="screen">
+
+    <!-- HEADER -->
+    <header class="top">
+      <h1>Mensagens</h1>
+      <p class="top-subtitle">Vê as conversas com os teus professores e com a LABRATS.</p>
+    </header>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main class="messages-main">
+
+      <!-- Conversa LABRATS -->
+      <section class="card convo-card">
+        <div class="convo-header">
+          <div class="convo-id">
+            <div class="convo-avatar convo-avatar-labrats">LB</div>
+            <div>
+              <h2 class="convo-name">LABRATS</h2>
+              <p class="convo-sub">Notificações da aplicação</p>
+            </div>
+          </div>
+          <span class="convo-time">há 2 h</span>
+        </div>
+
+        <div class="convo-thread">
+          <div class="bubble bubble-system">
+            <p>Já está disponível o novo <strong>jogo diário</strong>! 🎮</p>
+            <p>Hoje o desafio é sobre <strong>frações do 5º ano</strong>. Tenta ganhar o máximo de estrelas!</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Conversa Miguel Rodrigues -->
+      <section class="card convo-card">
+        <div class="convo-header">
+          <div class="convo-id">
+            <div class="convo-avatar">MR</div>
+            <div>
+              <h2 class="convo-name">Miguel Rodrigues</h2>
+              <p class="convo-sub">Professor de Matemática</p>
+            </div>
+          </div>
+          <span class="convo-time">há 3 h</span>
+        </div>
+
+        <div class="convo-thread">
+          <div class="bubble bubble-student">
+            Professor, tive dúvidas nos últimos exercícios de frações.  
+          </div>
+
+          <div class="bubble bubble-teacher">
+            Obrigado por avisares! 👌  
+            Amanhã na explicação vamos começar por rever esses exercícios.
+          </div>
+
+          <div class="bubble bubble-student">
+            Obrigado! Vou tentar repetir o jogo diário antes da aula.
+          </div>
+        </div>
+      </section>
+
+      <!-- Conversa Carla Silva -->
+      <section class="card convo-card">
+        <div class="convo-header">
+          <div class="convo-id">
+            <div class="convo-avatar">CS</div>
+            <div>
+              <h2 class="convo-name">Carla Silva</h2>
+              <p class="convo-sub">Professora de Português</p>
+            </div>
+          </div>
+          <span class="convo-time">ontem</span>
+        </div>
+
+        <div class="convo-thread">
+          <div class="bubble bubble-teacher">
+            Olá! Não te esqueças de trazer o texto que começaste a escrever para o trabalharmos juntos. ✍️
+          </div>
+          <div class="bubble bubble-student">
+            Já está quase pronto, professora. Vou acabar hoje à noite.
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- LOW BAR / NAV INFERIOR -->
+    <nav class="bottom-nav">
+      <!-- Conteúdos gerais -->
+      <button class="nav-btn" onclick="location.href='conteudos.html'">
+        <span class="nav-icon">📚</span>
+        <span class="nav-label">Conteúdos</span>
+      </button>
+
+      <!-- Centro -->
+      <button class="nav-btn" onclick="location.href='centro.html'">
+        <span class="nav-icon">🏫</span>
+        <span class="nav-label">Centro</span>
+      </button>
+
+      <!-- Perfil do aluno -->
+      <button class="nav-btn nav-btn-main" onclick="location.href='aluno.html'">
+        <span class="nav-icon">👤</span>
+      </button>
+
+      <!-- Mensagens (página atual) -->
+      <button class="nav-btn active" onclick="location.href='mensagens.html'">
+        <span class="nav-icon">💬</span>
+        <span class="nav-label">Mensagens</span>
+      </button>
+
+      <!-- Definições -->
+      <button class="nav-btn" onclick="location.href='definicoes.html'">
+        <span class="nav-icon">⚙️</span>
+        <span class="nav-label">Definições</span>
+      </button>
+    </nav>
+
+  </div>
+</body>
+</html>

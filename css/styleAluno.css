@@ -1,0 +1,267 @@
+/* ========================================================= */
+/* ====================  LOW BAR DA APP  ==================== */
+/* ========================================================= */
+
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #ffeec0; /* creme */
+  padding: 12px 28px 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 20;
+  box-sizing: border-box;
+}
+
+/* Botões laterais */
+.nav-btn {
+  flex: 1;
+  background: none;
+  border: none;
+  outline: none;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  font-size: 11px;
+  font-family: inherit;
+  color: #0b4f8a;
+  cursor: pointer;
+}
+
+.nav-icon {
+  font-size: 20px;
+}
+
+.nav-label {
+  letter-spacing: 0.06em;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+/* Botão principal — Perfil */
+.nav-btn-main {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%) translateY(-26px);
+  width: 70px;
+  height: 70px;
+  border-radius: 999px;
+  background: #ffeec0;
+  border: 6px solid #0b4f8a;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.18);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav-btn-main .nav-icon {
+  font-size: 28px;
+}
+
+/* Estado ativo */
+.nav-btn.active .nav-icon,
+.nav-btn.active .nav-label {
+  color: #ff7b2a;
+}
+
+/* Ecrãs muito pequenos */
+@media (max-width: 480px) {
+  .nav-label {
+    display: none;
+  }
+}
+
+
+/* ========================================================= */
+/* ==  A PARTIR DAQUI É O CONTEÚDO ESPECÍFICO DESTA PÁGINA == */
+/* ========================================================= */
+
+/* Fonte base (igual ao resto da app) */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; }
+
+html {
+  scrollbar-gutter: stable both-edges;
+}
+
+body {
+  font-family: "Poppins", Arial, Helvetica, sans-serif;
+  background-color: #D8ECFF; /* azul clarinho */
+  color: #0E1B24;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Estrutura */
+.screen {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 96px; /* espaço para a low bar */
+}
+
+/* HEADER DO ALUNO */
+.top.student-top {
+  padding: 16px 18px 10px;
+  background-color: #D8ECFF;
+}
+
+.student-id {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.student-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  background: #0A67B2;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.student-name {
+  margin: 0;
+  font-size: 22px;
+}
+
+.student-line {
+  margin: 2px 0 0;
+  font-size: 13px;
+  color: #355572;
+}
+
+/* CONTEÚDO PRINCIPAL */
+.student-main {
+  padding: 10px 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* Cards genéricos */
+.card {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 14px 16px;
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.08);
+}
+
+.card-title {
+  margin: 0 0 6px;
+  font-size: 17px;
+}
+
+.card-subtitle {
+  margin: 0 0 10px;
+  font-size: 13px;
+  color: #64748b;
+}
+
+/* Próxima explicação */
+.next-lesson-card .next-lesson-when {
+  margin: 4px 0 2px;
+  font-weight: 600;
+  color: #0A67B2;
+  font-size: 15px;
+}
+
+.next-lesson-subject {
+  margin: 0 0 2px;
+  font-size: 14px;
+}
+
+.next-lesson-center {
+  margin: 0;
+  font-size: 12px;
+  color: #64748b;
+}
+
+/* Conteúdos 5º ano */
+.year-content-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.content-chip {
+  border: none;
+  border-radius: 999px;
+  padding: 8px 10px;
+  font-size: 13px;
+  font-weight: 600;
+  background: #0A67B2;
+  color: #ffffff;
+  cursor: pointer;
+  box-shadow: 0 4px 0 #0b4e86;
+  transition: transform 0.06s ease, opacity 0.15s ease;
+}
+
+.content-chip:active {
+  transform: translateY(1px);
+}
+
+.content-chip:hover {
+  opacity: 0.95;
+}
+
+/* Jogo diário */
+.daily-game-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 6px;
+}
+
+.daily-tag {
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: #fde68a;
+  color: #92400e;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.btn-play {
+  margin-top: 8px;
+  border: none;
+  border-radius: 999px;
+  padding: 9px 16px;
+  font-size: 14px;
+  font-weight: 700;
+  background: #22c55e;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 4px 0 #15803d;
+  transition: transform 0.06s ease, opacity 0.15s ease;
+}
+
+.btn-play:hover {
+  opacity: 0.96;
+}
+
+.btn-play:active {
+  transform: translateY(1px);
+}
+
+/* Ajustes em ecrãs maiores */
+@media (min-width: 480px) {
+  .student-main {
+    max-width: 480px;
+    margin: 0 auto 0;
+    width: 100%;
+  }
+}

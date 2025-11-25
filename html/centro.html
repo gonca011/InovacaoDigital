@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Centro de Estudos</title>
+  <link rel="stylesheet" href="/css/styleCentro.css" />
+</head>
+<body>
+  <div class="screen">
+
+    <header class="top">
+      <h1>Centro de Estudos</h1>
+    </header>
+
+    <main class="centro-main">
+
+      <!-- BLOCO PARA INSERIR CÓDIGO -->
+      <section id="codigo-section" class="card code-card">
+        <h2>Entrar no centro</h2>
+        <p class="subtitle">Coloca o código fornecido pelo centro de estudos.</p>
+
+        <input type="text" id="codigo-input" placeholder="Ex: 1234">
+        <button id="codigo-btn">Entrar</button>
+
+        <p id="codigo-erro" class="erro-msg"></p>
+      </section>
+
+      <!-- BLOCO COM O CONTEÚDO DO CENTRO -->
+      <section id="conteudo-section" class="hidden">
+
+        <!-- Conteúdos exclusivos -->
+        <div class="card">
+          <h2>Conteúdos do Centro</h2>
+          <div class="centro-content-list">
+            <button class="centro-item">📘 Fichas de Matemática</button>
+            <button class="centro-item">🧪 Apoio a Ciências</button>
+            <button class="centro-item">📄 Materiais de Revisão</button>
+            <button class="centro-item">📝 Exercícios Extra</button>
+          </div>
+        </div>
+
+        <!-- Professores -->
+        <div class="card">
+          <h2>Professores</h2>
+          <div class="prof-list">
+            <div class="prof-item">
+              <span class="prof-avatar">MR</span>
+              <div>
+                <p class="prof-name">Miguel Rodrigues</p>
+                <p class="prof-sub">Matemática</p>
+              </div>
+            </div>
+
+            <div class="prof-item">
+              <span class="prof-avatar">CS</span>
+              <div>
+                <p class="prof-name">Carla Silva</p>
+                <p class="prof-sub">Português</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Avisos rápidos -->
+        <div class="card">
+          <h2>Avisos</h2>
+          <ul class="avisos-list">
+            <li>📅 Centro encerrado na próxima 6ª feira.</li>
+            <li>📝 Nova ficha de treino disponível em Matemática.</li>
+            <li>⏰ Atividades extra começam às 17h.</li>
+          </ul>
+        </div>
+
+      </section>
+
+    </main>
+
+    <!-- BOTTOM NAV -->
+    <nav class="bottom-nav">
+      <button class="nav-btn" onclick="location.href='conteudos.html'">
+        <span class="nav-icon">📚</span>
+        <span class="nav-label">Conteúdos</span>
+      </button>
+
+      <button class="nav-btn nav-btn-main" onclick="location.href='aluno.html'">
+        <span class="nav-icon">👤</span>
+      </button>
+
+      <button class="nav-btn active" onclick="location.href='centro.html'">
+        <span class="nav-icon">🏫</span>
+        <span class="nav-label">Centro</span>
+      </button>
+
+      <button class="nav-btn" onclick="location.href='mensagens.html'">
+        <span class="nav-icon">💬</span>
+        <span class="nav-label">Mensagens</span>
+      </button>
+
+            <!-- Definições -->
+      <button class="nav-btn" onclick="location.href='definicoes.html'">
+        <span class="nav-icon">⚙️</span>
+        <span class="nav-label">Definições</span>
+      </button>
+    </nav>
+
+  </div>
+
+  <script src="/js/centro.js"></script>
+</body>
+</html>

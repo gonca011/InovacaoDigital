@@ -1,0 +1,279 @@
+/* ========================================================= */
+/* ====================  LOW BAR DA APP  ==================== */
+/* ========================================================= */
+
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #ffeec0;
+  padding: 12px 28px 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 20;
+  box-sizing: border-box;
+}
+
+.nav-btn {
+  flex: 1;
+  background: none;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  color: #0b4f8a;
+  font-size: 11px;
+  cursor: pointer;
+  font-family: inherit; /* garante mesma fonte que o body */
+}
+
+.nav-icon {
+  font-size: 20px;
+}
+
+.nav-label {
+  letter-spacing: 0.06em;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+/* Botão principal (perfil) ao centro */
+.nav-btn-main {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%) translateY(-26px);
+  width: 70px;
+  height: 70px;
+  border-radius: 999px;
+  background: #ffeec0;
+  border: 6px solid #0b4f8a;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.18);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav-btn-main .nav-icon {
+  font-size: 28px;
+}
+
+/* Estado ativo (se quiseres usar) */
+.nav-btn.active .nav-icon,
+.nav-btn.active .nav-label {
+  color: #ff7b2a;
+}
+
+/* Em ecrãs muito pequenos escondemos o texto */
+@media (max-width: 480px) {
+  .nav-label {
+    display: none;
+  }
+}
+
+
+/* ========================================================= */
+/* ==  A PARTIR DAQUI É O CONTEÚDO ESPECÍFICO DESTA PÁGINA == */
+/* ========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap');
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+  margin: 0;
+  scrollbar-gutter: stable both-edges;
+}
+
+body {
+  height: 100%;
+  margin: 0;
+  font-family: "Poppins", Arial, sans-serif;
+  background: #D8ECFF;          /* azul clarinho */
+  color: #0E1B24;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Estrutura geral */
+.screen {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 100px;         /* espaço para a low bar */
+}
+
+/* HEADER */
+.top {
+  text-align: center;
+  padding: 16px 12px;
+  background-color: #D8ECFF;
+}
+
+.top h1 {
+  margin: 0;
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #0A67B2;
+  font-family: "Comic Sans MS", "Poppins", cursive; /* igual ao LABRATS */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.15);
+  text-transform: uppercase;
+}
+
+/* CONTEÚDO PRINCIPAL – centrado e com largura limitada */
+.centro-main {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 900px;              /* largura máxima do conteúdo */
+  margin: 0 auto 24px;           /* centra no ecrã */
+}
+
+/* CARTÕES GENERICOS */
+.card {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 18px 20px;
+  box-shadow: 0 10px 22px rgba(15, 23, 42, 0.10);
+}
+
+/* Bloco pedir código */
+.subtitle {
+  font-size: 13px;
+  color: #64748b;
+  margin-bottom: 10px;
+}
+
+#codigo-input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #cbd5e1;
+  margin-bottom: 12px;
+  font-size: 14px;
+}
+
+#codigo-btn {
+  width: 100%;
+  padding: 10px;
+  border-radius: 999px;
+  border: none;
+  background: #0a67b2;
+  color: white;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  box-shadow: 0 4px 0 #0b4e86;
+  transition: transform 0.06s ease, opacity 0.15s ease;
+}
+
+#codigo-btn:hover {
+  opacity: 0.96;
+}
+
+#codigo-btn:active {
+  transform: translateY(1px);
+}
+
+.hidden {
+  display: none;
+}
+
+.erro-msg {
+  color: #ef4444;
+  font-size: 13px;
+  margin-top: 6px;
+}
+
+/* CONTEÚDOS DO CENTRO */
+.centro-content-list {
+  display: grid;
+  gap: 8px;
+}
+
+.centro-item {
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: #0a67b2;
+  color: white;
+  font-weight: 600;
+  text-align: left;
+  border: none;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 0 #0b4e86;
+}
+
+.centro-item:active {
+  transform: translateY(1px);
+}
+
+/* PROFESSORES */
+.prof-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.prof-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.prof-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  background: #0a67b2;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 700;
+}
+
+.prof-name {
+  margin: 0;
+  font-size: 14px;
+}
+
+.prof-sub {
+  margin: 2px 0 0;
+  font-size: 12px;
+  color: #64748b;
+}
+
+/* AVISOS */
+.avisos-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 13px;
+}
+
+.avisos-list li + li {
+  margin-top: 4px;
+}
+
+/* Em ecrãs mais pequenos, ajustar um pouco */
+@media (max-width: 480px) {
+  .centro-main {
+    max-width: 100%;
+    padding: 12px;
+  }
+
+  .card {
+    border-radius: 16px;
+    padding: 14px 14px;
+  }
+}
