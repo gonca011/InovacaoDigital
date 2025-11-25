@@ -3,36 +3,56 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>LABRATS – 2º Ciclo</title>
-  <link rel="stylesheet" href="../css/stylehome.css" />
+  <title>LABRATS - 2º CICLO</title>
+  <link rel="stylesheet" href="/css/styleHome.css" />
+  <link rel="icon" href="/Back-Office/Gestor/Imagens/Logo.png" type="image/x-icon" />
 </head>
 <body>
   <div class="screen">
-
-    <!-- Cabeçalho simples (sem pesquisa) -->
     <header class="top">
-      <h1>2º CICLO</h1>
+      <h1>LABRATS - 2º CICLO</h1>
     </header>
 
-    <!-- Lista de temas -->
+    <!-- Lista de ciclos -->
     <main class="list">
-      <button class="btn-cycle" onclick="location.href='matematica.html'">MATEMÁTICA</button>
-      <button class="btn-cycle" onclick="location.href='portugues.html'">PORTUGUÊS</button>
-      <button class="btn-cycle" onclick="location.href='ingles.html'">INGLÊS</button>
-      <button class="btn-cycle" onclick="location.href='estudo_meio.html'">CIÊNCIAS NATURAIS</button>
-      <button class="btn-cycle" onclick="location.href='ingles.html'">HISTÓRIA E GEOGRAFIA</button>
+      <button class="btn-cycle" onclick="location.href='2cicloDisciplinas.html'">5º Ano</button>
+      <button class="btn-cycle" onclick="location.href='2cicloDisciplinas.html'">6º Ano</button>
     </main>
 
-    <!-- Barra inferior (apenas casa) -->
-    <nav class="bottombar">
-        <button class="home-btn" aria-label="Home" onclick="location.href='home.html'">
-        <span class="home-ring">
-            <svg class="home-icon" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M3 10.5 12 3l9 7.5v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1v-9z"/>
-            </svg>
-        </span>
-        </button>
+    <!-- NOVA LOW BAR -->
+    <nav class="bottom-nav">
+
+      <!-- Conteúdos -->
+      <button class="nav-btn active" onclick="location.href='conteudos.html'">
+        <span class="nav-icon">📚</span>
+        <span class="nav-label">Conteúdos</span>
+      </button>
+
+      <!-- Centro -->
+      <button class="nav-btn" onclick="location.href='centro.html'">
+        <span class="nav-icon">🏫</span>
+        <span class="nav-label">Centro</span>
+      </button>
+
+      <!-- Grande botão central (Perfil do aluno) -->
+      <button class="nav-btn nav-btn-main" onclick="location.href='aluno.html'">
+        <span class="nav-icon">👤</span>
+      </button>
+
+      <!-- Mensagens -->
+      <button class="nav-btn" onclick="location.href='mensagens.html'">
+        <span class="nav-icon">💬</span>
+        <span class="nav-label">Mensagens</span>
+      </button>
+
+      <!-- Definições -->
+      <button class="nav-btn" onclick="location.href='promo.html'">
+        <span class="nav-icon">⚙️</span>
+        <span class="nav-label">Definições</span>
+      </button>
+
     </nav>
+
   </div>
 </body>
 </html>

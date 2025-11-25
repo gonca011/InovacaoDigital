@@ -111,9 +111,13 @@ body {
 
 .top h1 {
   margin: 0;
-  font-size: 24px;
+  font-size: 32px;
   font-weight: 700;
+  letter-spacing: 2px;
   color: #0A67B2;
+  font-family: "Comic Sans MS", "Poppins", cursive;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.15);
+  text-transform: uppercase;
 }
 
 .top-subtitle {

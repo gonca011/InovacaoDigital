@@ -141,6 +141,11 @@ body {
   border-radius: 18px;
   padding: 18px 20px;
   box-shadow: 0 10px 22px rgba(15, 23, 42, 0.10);
+  /*distância vertical entre cartões*/
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 12px;
 }
 
 /* Bloco pedir código */
