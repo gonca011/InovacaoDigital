@@ -1,0 +1,256 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f5f6fa;
+    height: 100vh;
+}
+
+/* Sidebar igual à base desejada */
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    background-color: #ffffff;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 0 20px 20px 0;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.logo {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.logo img {
+    width: 120px;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    margin-bottom: 15px;
+}
+
+nav ul li a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    padding: 10px;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+    font-size: 16px;
+}
+
+nav ul li a:hover,
+nav ul li a.active {
+    background-color: #e2e8ff;
+    font-weight: bold;
+}
+
+.add-auditoria {
+    margin-top: 20px;
+    padding: 15px 0;
+}
+
+.add-auditoria button {
+    width: 100%;
+    padding: 10px;
+    background-color: #fff;
+    border: 2px solid #aaa;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.add-auditoria button:hover {
+    background-color: #f0f0f0;
+}
+
+.user-info {
+    padding-top: 20px;
+    border-top: 1px solid #e0e0e0;
+    text-align: left;
+    font-size: 14px;
+    color: #555;
+}
+
+.user-info p:first-child {
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 5px;
+}
+
+/* Conteúdo principal */
+.content {
+    margin-left: 250px;
+    padding: 30px;
+    width: calc(100% - 250px);
+    background-color: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 20px 30px;
+    border-radius: 12px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 900px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 22px;
+    color: #333;
+}
+
+header button {
+    background: none;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 6px 10px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+/* Formulário */
+.form-registo {
+    background-color: white;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    max-width: 750px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-registo input,
+.form-registo select {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+}
+
+.form-registo input:focus,
+.form-registo select:focus {
+    border-color: #2563eb;
+    outline: none;
+}
+
+.data-nascimento {
+    display: flex;
+    gap: 12px;
+}
+
+.data-nascimento select {
+    flex: 1;
+}
+
+.form-registo button[type="submit"] {
+    background-color: #2563eb;
+    color: #fff;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.form-registo button[type="submit"]:hover {
+    background-color: #1e40af;
+}
+
+.feedback-message {
+  display: none; /* Inicialmente escondido */
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 15px;
+  background-color: #4CAF50; /* Verde por padrão (pode ser alterado para outros tipos de feedback) */
+  color: white;
+  border-radius: 5px;
+  font-size: 16px;
+  z-index: 1000; /* Garante que a mensagem apareça sobre o conteúdo */
+  text-align: center;
+  width: 80%;
+  max-width: 500px;
+}
+
+.feedback-message.error {
+  background-color: #f44336; /* Vermelho para erros (exemplo: Ocorrência Rejeitada) */
+}
+
+.feedback-message.warning {
+  background-color: #ff9800; /* Amarelo para advertências (exemplo: Ocorrência Pendente) */
+}
+
+.feedback-message.success {
+  background-color: #4CAF50; /* Verde para sucesso (exemplo: Ocorrência Aceita) */
+}
+
+.telefone-container {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.prefixo-telefone {
+  position: absolute;
+  top: 45%;
+  left: 10px;
+  transform: translateY(-50%);
+  font-size: 14px;
+  pointer-events: none; /* para o clique passar para o input */
+  color: #555;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.telefone-container input[type="tel"] {
+  padding-left: 80px; /* espaço para o prefixo */
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.flag-icon {
+  width: 20px;
+  height: auto;
+  vertical-align: middle;
+  margin-right: 5px;
+}

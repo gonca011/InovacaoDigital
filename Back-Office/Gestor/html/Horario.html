@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Novas Ocorrências - EyesEverywhere</title>
+  <link rel="stylesheet" href="/Back-Office/Gestor/css/NovasOcorrencias.css" />
+  <link rel="icon" href="/Back-Office/Gestor/Imagens/Logo.png" type="image/x-icon" />
+</head>
+<body>
+  <div class="sidebar">
+    <div class="logo">
+      <img src="/Back-Office/Gestor/Imagens/Logo.png" alt="EyesEverywhere" />
+    </div>
+    <nav>
+      <ul>
+        <li><a data-page="Geral.html" href="Geral.html">🏠 Visão Geral</a></li>
+        <li><a class="active" data-page="Horario.html" href="Horario.html">🗓️ Horário</a></li>
+        <li><a data-page="Alunos.html" href="Alunos.html">👥 Alunos</a></li>
+        <li><a data-page="Conteudos.html" href="Conteudos.html">📚 Conteúdos</a></li>    
+      </ul>
+    </nav>
+    <div class="add-auditoria"> 
+      <a href="/Back-Office/Gestor/html/PlanoAuditoria.html">
+        <button>+ Adicionar Conteúdo</button>
+      </a>
+    </div>
+    <div class="user-info">
+      <p id="user-name">Utilizador não logado</p>
+      <p id="user-email">Sem e-mail</p>
+    </div>
+  </div>
+
+  <!-- FECHA A SIDEBAR AQUI -->
+  </div>
+
+  <!-- CONTEÚDO PRINCIPAL -->
+  <div class="content">
+    <header class="content-header">
+      <h1>Horário</h1>
+    </header>
+
+    <section class="schedule-container">
+      <!-- Formulário para adicionar marcações -->
+      <form id="add-slot-form" class="schedule-form">
+        <div class="form-group">
+          <label for="day">Dia</label>
+          <select id="day" name="day" required>
+            <option value="segunda">Segunda</option>
+            <option value="terca">Terça</option>
+            <option value="quarta">Quarta</option>
+            <option value="quinta">Quinta</option>
+            <option value="sexta">Sexta</option>
+            <option value="sabado">Sábado</option>
+            <option value="domingo">Domingo</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="hour">Início</label>
+          <select id="start-hour" name="hour" required>
+            <option value="08:00">08:00</option>
+            <option value="09:00">09:00</option>
+            <option value="10:00">10:00</option>
+            <option value="11:00">11:00</option>
+            <option value="12:00">12:00</option>
+            <option value="13:00">13:00</option>
+            <option value="14:00">14:00</option>
+            <option value="15:00">15:00</option>
+            <option value="16:00">16:00</option>
+            <option value="17:00">17:00</option>
+            <option value="18:00">18:00</option>
+            <option value="19:00">19:00</option>
+            <option value="20:00">20:00</option>
+            <option value="21:00">21:00</option>
+          </select>
+        </div>
+
+          <div class="form-group">
+          <label for="hour">Fim</label>
+          <select id="end-hour" name="hour" required>
+            <option value="08:00">08:00</option>
+            <option value="09:00">09:00</option>
+            <option value="10:00">10:00</option>
+            <option value="11:00">11:00</option>
+            <option value="12:00">12:00</option>
+            <option value="13:00">13:00</option>
+            <option value="14:00">14:00</option>
+            <option value="15:00">15:00</option>
+            <option value="16:00">16:00</option>
+            <option value="17:00">17:00</option>
+            <option value="18:00">18:00</option>
+            <option value="19:00">19:00</option>
+            <option value="20:00">20:00</option>
+            <option value="21:00">21:00</option>
+          </select>
+        </div>
+
+        <div class="form-group form-group-wide">
+          <label for="description">Descrição</label>
+          <input
+            type="text"
+            id="description"
+            name="description"
+            placeholder="David"
+            required
+          />
+        </div>
+
+        <button type="submit" class="btn-add-slot">+ Adicionar ao horário</button>
+      </form>
+
+      <!-- Tabela do horário -->
+      <div class="schedule-table-wrapper">
+        <table class="schedule-table">
+          <thead>
+            <tr>
+              <th>Hora</th>
+              <th>Segunda</th>
+              <th>Terça</th>
+              <th>Quarta</th>
+              <th>Quinta</th>
+              <th>Sexta</th>
+              <th>Sábado</th>
+              <th>Domingo</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- 08:00 -->
+            <tr>
+              <th>08:00</th>
+              <td data-day="segunda" data-hour="08:00"></td>
+              <td data-day="terca" data-hour="08:00"></td>
+              <td data-day="quarta" data-hour="08:00"></td>
+              <td data-day="quinta" data-hour="08:00"></td>
+              <td data-day="sexta" data-hour="08:00"></td>
+              <td data-day="sabado" data-hour="08:00"></td>
+              <td data-day="domingo" data-hour="08:00"></td>
+            </tr>
+            <!-- 09:00 -->
+            <tr>
+              <th>09:00</th>
+              <td data-day="segunda" data-hour="09:00"></td>
+              <td data-day="terca" data-hour="09:00"></td>
+              <td data-day="quarta" data-hour="09:00"></td>
+              <td data-day="quinta" data-hour="09:00"></td>
+              <td data-day="sexta" data-hour="09:00"></td>
+              <td data-day="sabado" data-hour="09:00"></td>
+              <td data-day="domingo" data-hour="09:00"></td>
+            </tr>
+            <!-- 10:00 -->
+            <tr>
+              <th>10:00</th>
+              <td data-day="segunda" data-hour="10:00"></td>
+              <td data-day="terca" data-hour="10:00"></td>
+              <td data-day="quarta" data-hour="10:00"></td>
+              <td data-day="quinta" data-hour="10:00"></td>
+              <td data-day="sexta" data-hour="10:00"></td>
+              <td data-day="sabado" data-hour="10:00"></td>
+              <td data-day="domingo" data-hour="10:00"></td>
+            </tr>
+            <!-- 11:00 -->
+            <tr>
+              <th>11:00</th>
+              <td data-day="segunda" data-hour="11:00"></td>
+              <td data-day="terca" data-hour="11:00"></td>
+              <td data-day="quarta" data-hour="11:00"></td>
+              <td data-day="quinta" data-hour="11:00"></td>
+              <td data-day="sexta" data-hour="11:00"></td>
+              <td data-day="sabado" data-hour="11:00"></td>
+              <td data-day="domingo" data-hour="11:00"></td>
+            </tr>
+            <!-- 12:00 -->
+            <tr>
+              <th>12:00</th>
+              <td data-day="segunda" data-hour="12:00"></td>
+              <td data-day="terca" data-hour="12:00"></td>
+              <td data-day="quarta" data-hour="12:00"></td>
+              <td data-day="quinta" data-hour="12:00"></td>
+              <td data-day="sexta" data-hour="12:00"></td>
+              <td data-day="sabado" data-hour="12:00"></td>
+              <td data-day="domingo" data-hour="12:00"></td>
+            </tr>
+            <!-- 13:00 -->
+            <tr>
+              <th>13:00</th>
+              <td data-day="segunda" data-hour="13:00"></td>
+              <td data-day="terca" data-hour="13:00"></td>
+              <td data-day="quarta" data-hour="13:00"></td>
+              <td data-day="quinta" data-hour="13:00"></td>
+              <td data-day="sexta" data-hour="13:00"></td>
+              <td data-day="sabado" data-hour="13:00"></td>
+              <td data-day="domingo" data-hour="13:00"></td>
+            </tr>
+            <!-- 14:00 -->
+            <tr>
+              <th>14:00</th>
+              <td data-day="segunda" data-hour="14:00"></td>
+              <td data-day="terca" data-hour="14:00"></td>
+              <td data-day="quarta" data-hour="14:00"></td>
+              <td data-day="quinta" data-hour="14:00"></td>
+              <td data-day="sexta" data-hour="14:00"></td>
+              <td data-day="sabado" data-hour="14:00"></td>
+              <td data-day="domingo" data-hour="14:00"></td>
+            </tr>
+            <!-- 15:00 -->
+            <tr>
+              <th>15:00</th>
+              <td data-day="segunda" data-hour="15:00"></td>
+              <td data-day="terca" data-hour="15:00"></td>
+              <td data-day="quarta" data-hour="15:00"></td>
+              <td data-day="quinta" data-hour="15:00"></td>
+              <td data-day="sexta" data-hour="15:00"></td>
+              <td data-day="sabado" data-hour="15:00"></td>
+              <td data-day="domingo" data-hour="15:00"></td>
+            </tr>
+            <!-- 16:00 -->
+            <tr>
+              <th>16:00</th>
+              <td data-day="segunda" data-hour="16:00"></td>
+              <td data-day="terca" data-hour="16:00"></td>
+              <td data-day="quarta" data-hour="16:00"></td>
+              <td data-day="quinta" data-hour="16:00"></td>
+              <td data-day="sexta" data-hour="16:00"></td>
+              <td data-day="sabado" data-hour="16:00"></td>
+              <td data-day="domingo" data-hour="16:00"></td>
+            </tr>
+            <!-- 17:00 -->
+            <tr>
+              <th>17:00</th>
+              <td data-day="segunda" data-hour="17:00"></td>
+              <td data-day="terca" data-hour="17:00"></td>
+              <td data-day="quarta" data-hour="17:00"></td>
+              <td data-day="quinta" data-hour="17:00"></td>
+              <td data-day="sexta" data-hour="17:00"></td>
+              <td data-day="sabado" data-hour="17:00"></td>
+              <td data-day="domingo" data-hour="17:00"></td>
+            </tr>
+            <!-- 18:00 -->
+            <tr>
+              <th>18:00</th>
+              <td data-day="segunda" data-hour="18:00"></td>
+              <td data-day="terca" data-hour="18:00"></td>
+              <td data-day="quarta" data-hour="18:00"></td>
+              <td data-day="quinta" data-hour="18:00"></td>
+              <td data-day="sexta" data-hour="18:00"></td>
+              <td data-day="sabado" data-hour="18:00"></td>
+              <td data-day="domingo" data-hour="18:00"></td>
+            </tr>
+            <!-- 19:00 -->
+            <tr>
+              <th>19:00</th>
+              <td data-day="segunda" data-hour="19:00"></td>
+              <td data-day="terca" data-hour="19:00"></td>
+              <td data-day="quarta" data-hour="19:00"></td>
+              <td data-day="quinta" data-hour="19:00"></td>
+              <td data-day="sexta" data-hour="19:00"></td>
+              <td data-day="sabado" data-hour="19:00"></td>
+              <td data-day="domingo" data-hour="19:00"></td>
+            </tr>
+            <!-- 20:00 -->
+            <tr>
+              <th>20:00</th>
+              <td data-day="segunda" data-hour="20:00"></td>
+              <td data-day="terca" data-hour="20:00"></td>
+              <td data-day="quarta" data-hour="20:00"></td>
+              <td data-day="quinta" data-hour="20:00"></td>
+              <td data-day="sexta" data-hour="20:00"></td>
+              <td data-day="sabado" data-hour="20:00"></td>
+              <td data-day="domingo" data-hour="20:00"></td>
+            </tr>
+            <!-- 21:00 -->
+            <tr>
+              <th>21:00</th>
+              <td data-day="segunda" data-hour="21:00"></td>
+              <td data-day="terca" data-hour="21:00"></td>
+              <td data-day="quarta" data-hour="21:00"></td>
+              <td data-day="quinta" data-hour="21:00"></td>
+              <td data-day="sexta" data-hour="21:00"></td>
+              <td data-day="sabado" data-hour="21:00"></td>
+              <td data-day="domingo" data-hour="21:00"></td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="schedule-hint">
+          Dica: clica numa célula preenchida para a limpar.
+        </p>
+      </div>
+    </section>
+  </div>
+
+  <!-- JS PARA LIGAR O FORM AO HORÁRIO -->
+  <script>
+    const form = document.getElementById('add-slot-form');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const day = document.getElementById('day').value;
+      const start = document.getElementById('start-hour').value;
+      const end = document.getElementById('end-hour').value;
+      const description = document.getElementById('description').value.trim();
+
+      if (!description) return;
+
+      const startHour = parseInt(start.split(':')[0]);
+      const endHour = parseInt(end.split(':')[0]);
+
+      if (endHour <= startHour) {
+        alert("A hora de fim deve ser maior do que a hora de início.");
+        return;
+      }
+
+      for (let h = startHour; h < endHour; h++) {
+        const formatted = String(h).padStart(2, '0') + ":00";
+
+        const cell = document.querySelector(
+          `td[data-day="${day}"][data-hour="${formatted}"]`
+        );
+
+        if (cell) {
+          cell.textContent = description;
+          cell.classList.add('busy-slot');
+        }
+      }
+
+      form.reset();
+    });
+
+    // Clique para limpar
+    document.querySelectorAll('.schedule-table td').forEach((cell) => {
+      cell.addEventListener('click', () => {
+        cell.textContent = '';
+        cell.classList.remove('busy-slot');
+      });
+    });
+
+  </script>
+</body>
+</html>

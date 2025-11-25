@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Detalhe da Ocorrência - EyesEverywhere</title>
+  <link rel="stylesheet" href="/Back-Office/Gestor/css/DetalheOcorrencia.css" />
+  <link rel="icon" href="/Back-Office/Gestor/Imagens/Logo.png" type="image/x-icon" />
+</head>
+<body>
+  <div class="sidebar">
+    <div class="logo">
+      <img src="/Back-Office/Gestor/Imagens/Logo.png" alt="EyesEverywhere" />
+    </div>
+    <nav>
+      <ul>
+        <li><a data-page="Geral.html" href="Geral.html">🏠 Visão Geral</a></li>
+        <li><a data-page="Horario.html" href="Horario.html">🗓️ Horário</a></li>
+        <li><a data-page="Alunos.html" href="Alunos.html">👥 Alunos</a></li>
+        <li><a class="active" data-page="Conteudos.html" href="Conteudos.html">📚 Conteúdos</a></li>        
+      </ul>
+    </nav>
+    <div class="add-auditoria"> 
+      <a href="/Back-Office/Gestor/html/PlanoAuditoria.html">
+        <button>+ Adicionar Conteúdos</button>
+      </a>
+    </div>
+    <div class="user-info">
+      <p id="user-name">Utilizador não logado</p>
+      <p id="user-email">Sem e-mail</p>
+    </div>
+  </div>
+
+  <!-- CONTEÚDO PRINCIPAL -->
+  <div class="content">
+    <header class="content-header">
+      <h1>Conteúdos</h1>
+    </header>
+
+    <section class="contents-container">
+      <!-- Toggle Centro vs App -->
+      <div class="content-source-toggle">
+        <button class="source-btn active" data-source="centro">
+          Conteúdos do Centro de Estudos
+        </button>
+        <button class="source-btn" data-source="app">
+          Materiais Inovadores da Aplicação
+        </button>
+      </div>
+
+      <!-- Filtros -->
+      <div class="content-filters">
+        <div class="filter-group">
+          <label for="filter-year">Ano</label>
+          <select id="filter-year">
+            <option value="all">Todos os anos</option>
+            <option value="1">1º ano</option>
+            <option value="2">2º ano</option>
+            <option value="3">3º ano</option>
+            <option value="4">4º ano</option>
+            <option value="5">5º ano</option>
+            <option value="6">6º ano</option>
+            <option value="7">7º ano</option>
+            <option value="8">8º ano</option>
+            <option value="9">9º ano</option>
+            <option value="10">10º ano</option>
+            <option value="11">11º ano</option>
+            <option value="12">12º ano</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label for="filter-subject">Disciplina</label>
+          <select id="filter-subject">
+            <option value="all">Todas as disciplinas</option>
+            <option value="Matemática">Matemática</option>
+            <option value="Português">Português</option>
+            <option value="Físico-Química">Físico-Química</option>
+            <option value="Biologia">Biologia</option>
+            <option value="História">História</option>
+            <option value="Geografia">Geografia</option>
+            <option value="Inglês">Inglês</option>
+            <option value="Outra">Outra</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Lista / grid de conteúdos -->
+      <div id="content-list" class="content-list">
+        <!-- Cards criados via JS -->
+      </div>
+
+      <p id="no-results" class="no-results" style="display:none;">
+        Nenhum conteúdo encontrado com estes filtros.
+      </p>
+    </section>
+  </div>
+
+  <script>
+    // Dados de exemplo (podes depois substituir por dados reais)
+    const contents = [
+      {
+        id: 1,
+        title: 'Fichas de revisão de frações',
+        source: 'centro',
+        year: 6,
+        subject: 'Matemática',
+        type: 'Ficha',
+        description: 'Conjunto de exercícios guiados para consolidar frações e números mistos.'
+      },
+      {
+        id: 2,
+        title: 'Laboratório Interativo de Funções',
+        source: 'app',
+        year: 10,
+        subject: 'Matemática',
+        type: 'Atividade Interativa',
+        description: 'Exploração visual de funções com sliders e feedback imediato.'
+      },
+      {
+        id: 3,
+        title: 'Resumo: Revolução Francesa',
+        source: 'centro',
+        year: 9,
+        subject: 'História',
+        type: 'Resumo',
+        description: 'Mapa mental e resumo em bullet points dos principais acontecimentos.'
+      },
+      {
+        id: 4,
+        title: 'Desafio Gamificado de Vocabulário',
+        source: 'app',
+        year: 7,
+        subject: 'Inglês',
+        type: 'Jogo',
+        description: 'Mini-jogo com níveis de dificuldade e pontuação para praticar vocabulário.'
+      },
+      {
+        id: 5,
+        title: 'Exercícios de funções quadráticas',
+        source: 'centro',
+        year: 11,
+        subject: 'Matemática',
+        type: 'Exercícios',
+        description: 'Lista de exercícios progressivos para funções quadráticas e raízes.'
+      }
+    ];
+
+    let activeSource = 'centro'; // começar com conteúdos do centro
+
+    const contentListEl = document.getElementById('content-list');
+    const noResultsEl = document.getElementById('no-results');
+    const sourceButtons = document.querySelectorAll('.source-btn');
+    const yearFilterEl = document.getElementById('filter-year');
+    const subjectFilterEl = document.getElementById('filter-subject');
+
+    sourceButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        sourceButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        activeSource = btn.dataset.source;
+        renderContents();
+      });
+    });
+
+    yearFilterEl.addEventListener('change', renderContents);
+    subjectFilterEl.addEventListener('change', renderContents);
+
+    function yearLabel(year) {
+      return `${year}º ano`;
+    }
+
+    function renderContents() {
+      const yearValue = yearFilterEl.value;
+      const subjectValue = subjectFilterEl.value;
+
+      const filtered = contents.filter(item => {
+        const matchesSource = item.source === activeSource;
+        const matchesYear = yearValue === 'all' || item.year === parseInt(yearValue);
+        const matchesSubject = subjectValue === 'all' || item.subject === subjectValue;
+        return matchesSource && matchesYear && matchesSubject;
+      });
+
+      contentListEl.innerHTML = '';
+
+      if (filtered.length === 0) {
+        noResultsEl.style.display = 'block';
+        return;
+      } else {
+        noResultsEl.style.display = 'none';
+      }
+
+      filtered.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'content-card';
+
+        const sourceLabel =
+          item.source === 'centro'
+            ? 'Centro de Estudos'
+            : 'Aplicação LABRATS';
+
+        card.innerHTML = `
+          <div class="content-card-top">
+            <span class="content-pill ${
+              item.source === 'centro' ? 'pill-centro' : 'pill-app'
+            }">
+              ${sourceLabel}
+            </span>
+            <span class="content-meta">
+              ${yearLabel(item.year)} · ${item.subject} · ${item.type}
+            </span>
+          </div>
+          <h3 class="content-title">${item.title}</h3>
+          <p class="content-description">${item.description}</p>
+        `;
+
+        contentListEl.appendChild(card);
+      });
+    }
+
+    // inicializar
+    renderContents();
+  </script>
+</body>
+</html>

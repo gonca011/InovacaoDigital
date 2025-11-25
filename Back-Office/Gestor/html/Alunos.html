@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ocorrências - EyesEverywhere</title>
+  <link rel="stylesheet" href="/Back-Office/Gestor/css/Ocorrencias.css" />
+  <link rel="icon" href="/Back-Office/Gestor/Imagens/Logo.png" type="image/x-icon" />
+</head>
+<body>
+  <div class="sidebar">
+    <div class="logo">
+      <img src="/Back-Office/Gestor/Imagens/Logo.png" alt="EyesEverywhere" />
+    </div>
+    <nav>
+      <ul>
+      <li><a data-page="Geral.html" href="Geral.html">🏠 Visão Geral</a></li>
+      <li><a data-page="Horario.html" href="Horario.html">🗓️ Horário</a></li>
+      <li><a class="active" data-page="Alunos.html" href="Alunos.html">👥 Alunos</a></li>
+      <li><a data-page="Conteudos.html" href="Conteudos.html">📚 Conteúdos</a></li>
+      </ul>
+    </nav>
+    <div class="add-auditoria">
+      <a href="/Back-Office/Gestor/html/PlanoAuditoria.html">
+        <button>+ Adicionar Conteúdo</button>
+      </a>
+    </div>
+    <div class="user-info">
+      <p id="user-name">Utilizador não logado</p>
+      <p id="user-email">Sem e-mail</p>
+    </div>
+  </div>
+
+  <!-- CONTEÚDO PRINCIPAL -->
+  <div class="content">
+    <header class="content-header">
+      <h1>Alunos</h1>
+
+    </header>
+
+    <section class="students-container">
+      <div class="students-header-row">
+        <h2>Alunos com mensagens</h2>
+        <span class="students-hint">
+          Ordenado pelo aluno que aguarda resposta há mais tempo.
+        </span>
+      </div>
+
+      <ul id="students-list" class="students-list">
+        <!-- Os alunos são inseridos via JavaScript -->
+      </ul>
+    </section>
+  </div>
+
+  <script>
+    // Dados fictícios só para exemplo.
+    // Depois podes substituir por dados vindos do backend.
+    const students = [
+      {
+        id: 1,
+        name: 'David Silva',
+        exercisesDone: '2/4',
+        lastMessage: '2025-11-20T17:30:00', // ISO
+        hasUnread: true
+      },
+      {
+        id: 2,
+        name: 'Ana Costa',
+        exercisesDone: '0/4',
+        lastMessage: '2025-11-19T10:15:00',
+        hasUnread: true
+      },
+      {
+        id: 3,
+        name: 'João Pereira',
+        exercisesDone: '4/6',
+        lastMessage: '2025-11-22T15:00:00',
+        hasUnread: false
+      },
+      {
+        id: 4,
+        name: 'Marta Rocha',
+        exercisesDone: '5/5',
+        lastMessage: '2025-11-18T09:00:00',
+        hasUnread: true
+      }
+    ];
+
+    // Ordena pelo aluno que está há mais tempo sem resposta (mensagem mais antiga primeiro)
+    students.sort((a, b) => {
+      return new Date(a.lastMessage) - new Date(b.lastMessage);
+    });
+
+    const listEl = document.getElementById('students-list');
+
+    function timeAgoString(dateStr) {
+      const now = new Date();
+      const date = new Date(dateStr);
+      const diffMs = now - date; // milissegundos
+
+      const diffMinutes = Math.floor(diffMs / 60000);
+      const diffHours = Math.floor(diffMinutes / 60);
+      const diffDays = Math.floor(diffHours / 24);
+
+      if (diffMinutes < 1) return 'há instantes';
+      if (diffMinutes < 60) return `há ${diffMinutes} min`;
+      if (diffHours < 24) return `há ${diffHours} h`;
+      if (diffDays === 1) return 'há 1 dia';
+      return `há ${diffDays} dias`;
+    }
+
+    function getInitials(name) {
+      return name
+        .split(' ')
+        .filter(Boolean)
+        .map(part => part[0].toUpperCase())
+        .slice(0, 2)
+        .join('');
+    }
+
+    students.forEach(student => {
+      if (!student.lastMessage) return;
+
+      const li = document.createElement('li');
+      li.className = 'student-item';
+      li.dataset.id = student.id;
+
+      li.innerHTML = `
+        <div class="student-main">
+          <div class="student-avatar">${getInitials(student.name)}</div>
+          <div class="student-text">
+            <h3 class="student-name">${student.name}</h3>
+            <p class="student-meta">Exercícios realizados: <strong>${student.exercisesDone}</strong></p>
+          </div>
+        </div>
+        <div class="student-alert">
+          ${
+            student.hasUnread
+              ? `<span class="message-dot"></span>
+                <span class="message-text">Nova mensagem ${timeAgoString(student.lastMessage)}</span>`
+              : `<span class="message-text message-text-muted">Última mensagem ${timeAgoString(student.lastMessage)}</span>`
+          }
+        </div>
+      `;
+
+      // 👉 Adiciona este bloco
+      li.addEventListener('click', () => {
+        window.location.href = `Aluno.html?id=${student.id}`;
+      });
+      // Mais tarde aqui vais pôr o clique para abrir progresso + chat
+      // li.addEventListener('click', () => { ... });
+
+      listEl.appendChild(li);
+    });
+  </script>
+</body>
+</html>

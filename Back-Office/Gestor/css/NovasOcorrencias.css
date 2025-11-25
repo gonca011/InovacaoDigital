@@ -1,0 +1,234 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f5f6fa;
+    height: 100vh;
+}
+
+/* Sidebar igual à base desejada */
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    background-color: #ffffff;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 0 20px 20px 0;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.logo {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.logo img {
+    width: 120px;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    margin-bottom: 15px;
+}
+
+nav ul li a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    padding: 10px;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+    font-size: 16px;
+}
+
+nav ul li a:hover,
+nav ul li a.active {
+    background-color: #e2e8ff;
+    font-weight: bold;
+}
+
+.add-auditoria {
+    margin-top: 20px;
+    padding: 15px 0;
+}
+
+.add-auditoria button {
+    width: 100%;
+    padding: 10px;
+    background-color: #fff;
+    border: 2px solid #aaa;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.add-auditoria button:hover {
+    background-color: #f0f0f0;
+}
+
+.user-info {
+    padding-top: 20px;
+    border-top: 1px solid #e0e0e0;
+    text-align: left;
+    font-size: 14px;
+    color: #555;
+}
+
+.user-info p:first-child {
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 5px;
+}
+
+/* Conteúdo Principal */
+.content {
+  position: relative;
+  margin-left: 260px;             /* largura da sidebar */
+  padding: 32px 40px;
+  background-color: #f5f7fb;
+  min-height: 100vh;
+  width: calc(100% - 260px);      /* ocupa o resto do ecrã */
+  box-sizing: border-box;
+}
+
+.content-header h1 {
+  margin: 0 0 4px;
+  font-size: 28px;
+}
+
+.content-header p {
+  margin: 0 0 24px;
+  color: #64748b;
+}
+
+.schedule-container {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 20px 24px;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
+  width: 100%;                    /* caixa do horário ocupa toda a largura */
+  box-sizing: border-box;
+}
+
+/* Formulário */
+.schedule-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 16px;
+  margin-bottom: 20px;
+  align-items: flex-end;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  min-width: 140px;
+}
+
+.form-group-wide {
+  flex: 1;
+}
+
+.schedule-form label {
+  font-size: 13px;
+  margin-bottom: 4px;
+  color: #475569;
+}
+
+.schedule-form select,
+.schedule-form input {
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  padding: 6px 10px;
+  font-size: 14px;
+}
+
+.btn-add-slot {
+  border: none;
+  border-radius: 999px;
+  padding: 8px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  background: #2563eb;
+  color: #ffffff;
+  transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.15s;
+}
+
+.btn-add-slot:hover {
+  background: #1d4ed8;
+  box-shadow: 0 6px 14px rgba(37, 99, 235, 0.35);
+  transform: translateY(-1px);
+}
+
+/* Tabela */
+.schedule-table-wrapper {
+  width: 100%;                    /* wrapper também a 100% */
+  overflow-x: auto;
+  box-sizing: border-box;
+}
+
+.schedule-table {
+  width: 100%;                    /* tabela estica pela caixa toda */
+  border-collapse: collapse;
+  font-size: 14px;
+  table-layout: fixed;            /* colunas com largura consistente */
+}
+
+.schedule-table th,
+.schedule-table td {
+  border: 1px solid #e2e8f0;
+  padding: 8px 10px;
+  text-align: center;
+}
+
+.schedule-table thead th {
+  background-color: #f1f5f9;
+  font-weight: 600;
+}
+
+.schedule-table tbody th {
+  background-color: #f8fafc;
+  font-weight: 600;
+  width: 70px;
+}
+
+.schedule-table td {
+  min-width: 110px;
+  cursor: pointer;
+}
+
+/* Slot preenchido */
+.busy-slot {
+  background-color: #dbeafe;
+  color: #1e40af;
+  font-weight: 600;
+}
+
+.schedule-hint {
+  font-size: 12px;
+  color: #94a3b8;
+  margin-top: 8px;
+}
+

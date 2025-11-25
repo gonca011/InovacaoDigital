@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aluno - LABRATS</title>
+  <link rel="stylesheet" href="/Back-Office/Gestor/css/aluno.css" />
+  <link rel="icon" href="/Back-Office/Gestor/Imagens/Logo.png" type="image/x-icon" />
+</head>
+<body>
+  <div class="sidebar">
+    <div class="logo">
+      <img src="/Back-Office/Gestor/Imagens/Logo.png" alt="LABRATS" />
+    </div>
+    <nav>
+      <ul>
+        <li><a data-page="Geral.html" href="Geral.html">🏠 Visão Geral</a></li>
+        <li><a data-page="Horario.html" href="Horario.html">🗓️ Horário</a></li>
+        <li><a class="active" data-page="Alunos.html" href="Alunos.html">👥 Alunos</a></li>
+        <li><a data-page="Conteudos.html" href="Conteudos.html">📚 Conteúdos</a></li>    
+      </ul>
+    </nav>
+    <div class="add-auditoria"> 
+      <a href="/Back-Office/Gestor/html/PlanoAuditoria.html">
+        <button>+ Adicionar Conteúdo</button>
+      </a>
+    </div>
+    <div class="user-info">
+      <p id="user-name">Utilizador não logado</p>
+      <p id="user-email">Sem e-mail</p>
+    </div>
+  </div>
+
+  <!-- CONTEÚDO PRINCIPAL -->
+  <div class="content">
+    <header class="content-header student-header">
+      <div class="student-header-left">
+        <div class="student-avatar-big" id="student-avatar">DF</div>
+        <div>
+          <h1 id="student-name">David Silva</h1>
+          <p class="student-info-line" id="student-info">9º ano · Matemática, Físico-Química</p>
+          <p class="student-info-sub" id="student-extra">
+            Inscrito desde 2024 · Última atividade há 2 dias
+          </p>
+        </div>
+      </div>
+    </header>
+
+    <section class="student-detail-grid">
+      <!-- Coluna principal: mensagens -->
+      <div class="student-main-column">
+        <div class="student-panel">
+          <div class="panel-header">
+            <h2>Mensagens</h2>
+            <span class="panel-subtitle" id="last-message-info">Última mensagem há 3 h</span>
+          </div>
+          <div class="messages-thread" id="messages-thread">
+            <!-- Bubbles criadas por JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Coluna lateral: exercícios, dificuldades, próxima aula -->
+      <div class="student-side-column">
+        <!-- Exercícios semana -->
+        <div class="student-panel">
+          <div class="panel-header">
+            <h2>Exercícios desta semana</h2>
+            <span class="panel-subtitle">Feitos vs por fazer</span>
+          </div>
+          <div class="exercise-summary">
+            <div class="exercise-numbers">
+              <span id="ex-done" class="exercise-done">8 feitos</span>
+              <span id="ex-remaining" class="exercise-remaining">4 por fazer</span>
+            </div>
+            <div class="exercise-progress-bar">
+              <div id="ex-progress-fill" class="exercise-progress-fill"></div>
+            </div>
+            <p class="exercise-hint">Baseado nos exercícios planeados para esta semana.</p>
+          </div>
+        </div>
+
+        <!-- Dificuldades -->
+        <div class="student-panel">
+          <div class="panel-header">
+            <h2>Maiores dificuldades</h2>
+            <span class="panel-subtitle">Calculadas pelo algoritmo da aplicação</span>
+          </div>
+          <ul class="difficulties-list" id="difficulties-list">
+            <!-- Linhas criadas por JS -->
+          </ul>
+        </div>
+
+        <!-- Próxima aula -->
+        <div class="student-panel">
+          <div class="panel-header">
+            <h2>Próxima aula</h2>
+          </div>
+          <div class="next-lesson-box" id="next-lesson-box">
+            <!-- Info criada por JS -->
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    // ====== DADOS EXEMPLO (depois podem vir do backend) ======
+    const student = {
+      name: 'David Silva',
+      year: 9,
+      subjects: ['Matemática', 'Físico-Química'],
+      since: '2024-01-15',
+      lastActivity: '2025-11-20T18:30:00',
+      exercisesWeek: {
+        done: 8,
+        total: 12
+      },
+      messages: [
+        {
+          from: 'student',
+          text: 'Olá professor, tenho dúvidas nas inequações do TPC.',
+          time: '2025-11-21T20:30:00'
+        },
+        {
+          from: 'teacher',
+          text: 'Olá David! Consegues dizer-me em que exercício sentiste mais dificuldade?',
+          time: '2025-11-21T21:00:00'
+        },
+        {
+          from: 'student',
+          text: 'Sobretudo no 3 e no 4. Não percebo bem quando é que troco o sinal.',
+          time: '2025-11-22T10:05:00'
+        }
+      ],
+      difficulties: [
+        { topic: 'Inequações de 1º grau', level: 0.9 },
+        { topic: 'Potências e notação científica', level: 0.7 },
+        { topic: 'Problemas com frações', level: 0.6 }
+      ],
+      nextLesson: {
+        datetime: '2025-11-23T15:30:00',
+        subject: 'Matemática — Preparação teste',
+        mode: 'Presencial · Sala 3'
+      }
+    };
+
+    // ====== FUNÇÕES AUXILIARES ======
+    function getInitials(name) {
+      return name
+        .split(' ')
+        .filter(Boolean)
+        .map(part => part[0].toUpperCase())
+        .slice(0, 2)
+        .join('');
+    }
+
+    function timeAgoString(dateStr) {
+      const now = new Date();
+      const date = new Date(dateStr);
+      const diffMs = now - date;
+
+      const diffMinutes = Math.floor(diffMs / 60000);
+      const diffHours = Math.floor(diffMinutes / 60);
+      const diffDays = Math.floor(diffHours / 24);
+
+      if (diffMinutes < 1) return 'há instantes';
+      if (diffMinutes < 60) return `há ${diffMinutes} min`;
+      if (diffHours < 24) return `há ${diffHours} h`;
+      if (diffDays === 1) return 'há 1 dia';
+      return `há ${diffDays} dias`;
+    }
+
+    function formatDateShort(dateStr) {
+      const d = new Date(dateStr);
+      return d.toLocaleString('pt-PT', {
+        weekday: 'long',
+        day: '2-digit',
+        month: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit'
+      });
+    }
+
+    // ====== PREENCHER HEADER DO ALUNO ======
+    document.getElementById('student-name').textContent = student.name;
+    document.getElementById('student-avatar').textContent = getInitials(student.name);
+    document.getElementById('student-info').textContent =
+      `${student.year}º ano · ${student.subjects.join(', ')}`;
+
+    document.getElementById('student-extra').textContent =
+      `Inscrito desde ${new Date(student.since).toLocaleDateString('pt-PT')} · Última atividade ${timeAgoString(student.lastActivity)}`;
+
+    // ====== MENSAGENS ======
+    const threadEl = document.getElementById('messages-thread');
+
+    student.messages
+      .sort((a, b) => new Date(a.time) - new Date(b.time))
+      .forEach(msg => {
+        const bubble = document.createElement('div');
+        bubble.className =
+          'message-bubble ' +
+          (msg.from === 'student' ? 'message-student' : 'message-teacher');
+
+        bubble.innerHTML = `
+          <p class="message-text">${msg.text}</p>
+          <span class="message-time">${new Date(msg.time).toLocaleTimeString('pt-PT', {
+            hour: '2-digit',
+            minute: '2-digit'
+          })}</span>
+        `;
+
+        threadEl.appendChild(bubble);
+      });
+
+    const lastMsg = student.messages[student.messages.length - 1];
+    if (lastMsg) {
+      document.getElementById('last-message-info').textContent =
+        `Última mensagem ${timeAgoString(lastMsg.time)}`;
+    }
+
+    // ====== EXERCÍCIOS ======
+    const done = student.exercisesWeek.done;
+    const total = student.exercisesWeek.total;
+    const remaining = Math.max(total - done, 0);
+    const percent = total > 0 ? Math.round((done / total) * 100) : 0;
+
+    document.getElementById('ex-done').textContent = `${done} feitos`;
+    document.getElementById('ex-remaining').textContent = `${remaining} por fazer`;
+
+    const fillEl = document.getElementById('ex-progress-fill');
+    fillEl.style.width = percent + '%';
+    fillEl.setAttribute('data-percent', percent + '%');
+
+    // ====== DIFICULDADES ======
+    const diffListEl = document.getElementById('difficulties-list');
+    student.difficulties
+      .sort((a, b) => b.level - a.level)
+      .forEach(diff => {
+        const li = document.createElement('li');
+        li.className = 'difficulty-item';
+
+        const percentLevel = Math.round(diff.level * 100);
+
+        li.innerHTML = `
+          <div class="difficulty-top">
+            <span class="difficulty-topic">${diff.topic}</span>
+            <span class="difficulty-percent">${percentLevel}%</span>
+          </div>
+          <div class="difficulty-bar">
+            <div class="difficulty-bar-fill" style="width: ${percentLevel}%"></div>
+          </div>
+        `;
+
+        diffListEl.appendChild(li);
+      });
+
+    // ====== PRÓXIMA AULA ======
+    const nextLessonBox = document.getElementById('next-lesson-box');
+    if (student.nextLesson) {
+      nextLessonBox.innerHTML = `
+        <p class="next-lesson-time">${formatDateShort(student.nextLesson.datetime)}</p>
+        <p class="next-lesson-subject">${student.nextLesson.subject}</p>
+        <p class="next-lesson-mode">${student.nextLesson.mode}</p>
+      `;
+    } else {
+      nextLessonBox.innerHTML = `
+        <p class="next-lesson-empty">
+          Não há nenhuma aula agendada com este aluno.
+        </p>
+      `;
+    }
+  </script>
+</body>
+</html>

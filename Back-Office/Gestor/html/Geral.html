@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Visão Geral - LABRATS</title>
+  <link rel="stylesheet" href="/Back-Office/Gestor/css/Geral.css" />
+  <link rel="icon" href="/Back-Office/Gestor/Imagens/Logo.png" type="image/x-icon" />
+</head>
+<body>
+  <div class="sidebar">
+    <div class="logo">
+      <img src="/Back-Office/Gestor/Imagens/Logo.png" alt="LABRATS" />
+    </div>
+    <nav>
+      <ul>
+        <li><a class="active" data-page="Geral.html" href="Geral.html">🏠 Visão Geral</a></li>
+        <li><a data-page="Horario.html" href="Horario.html">🗓️ Horário</a></li>
+        <li><a data-page="Alunos.html" href="Alunos.html">👥 Alunos</a></li>
+        <li><a data-page="Conteudos.html" href="Conteudos.html">📚 Conteúdos</a></li>    
+      </ul>
+    </nav>
+    <div class="add-auditoria"> 
+      <a href="/Back-Office/Gestor/html/PlanoAuditoria.html">
+        <button>+ Adicionar Conteúdo</button>
+      </a>
+    </div>
+    <div class="user-info">
+      <p id="user-name">Utilizador não logado</p>
+      <p id="user-email">Sem e-mail</p>
+    </div>
+  </div>
+
+  <!-- CONTEÚDO PRINCIPAL -->
+  <div class="content">
+    <header class="content-header">
+      <h1>Visão Geral</h1>
+    </header>
+
+    <section class="dashboard-grid">
+      <!-- Card 1: Próximas aulas -->
+      <div class="dashboard-card card-next-classes">
+        <div class="card-header">
+          <h2>Próximas aulas de hoje</h2>
+          <span class="card-subtitle" id="today-label">Hoje</span>
+        </div>
+        <ul class="next-classes-list">
+          <!-- exemplos de dados; depois podes trocar por dados reais -->
+          <li class="next-class-item">
+            <div class="next-class-main">
+              <span class="next-class-time">14:00</span>
+              <div class="next-class-text">
+                <p class="next-class-title">Matemática — 9º ano</p>
+                <p class="next-class-meta">Joana Ferreira · Sala 2</p>
+              </div>
+            </div>
+          </li>
+          <li class="next-class-item">
+            <div class="next-class-main">
+              <span class="next-class-time">15:30</span>
+              <div class="next-class-text">
+                <p class="next-class-title">Físico-Química — 11º ano</p>
+                <p class="next-class-meta">Tiago Santos · Sala 1</p>
+              </div>
+            </div>
+          </li>
+          <li class="next-class-item">
+            <div class="next-class-main">
+              <span class="next-class-time">18:00</span>
+              <div class="next-class-text">
+                <p class="next-class-title">Inglês — 7º ano</p>
+                <p class="next-class-meta">Marta Rocha · Online</p>
+              </div>
+            </div>
+          </li>
+        </ul>
+        <p class="card-footer-text">
+          A agenda completa está na página de <strong>Horário</strong>.
+        </p>
+      </div>
+
+      <!-- Card 2: Mensagens por responder -->
+      <div class="dashboard-card">
+        <div class="card-header">
+          <h2>Mensagens por responder</h2>
+          <span class="card-subtitle">Ordenado por quem espera há mais tempo</span>
+        </div>
+        <ul class="dashboard-list">
+          <li class="dashboard-list-item">
+            <div class="dash-left">
+              <span class="message-dot"></span>
+              <span class="dash-text-strong">David Silva</span>
+            </div>
+            <span class="dash-text-muted">há 4 dias</span>
+          </li>
+          <li class="dashboard-list-item">
+            <div class="dash-left">
+              <span class="message-dot"></span>
+              <span class="dash-text-strong">Ana Costa</span>
+            </div>
+            <span class="dash-text-muted">há 3 dias</span>
+          </li>
+          <li class="dashboard-list-item">
+            <div class="dash-left">
+              <span class="message-dot"></span>
+              <span class="dash-text-strong">Marta Rocha</span>
+            </div>
+            <span class="dash-text-muted">há 2 dias</span>
+          </li>
+          <li class="dashboard-list-item">
+            <div class="dash-left">
+              <span class="message-dot message-dot-muted"></span>
+              <span class="dash-text-strong">João Pereira</span>
+            </div>
+            <span class="dash-text-muted">respondido há 3 h</span>
+          </li>
+        </ul>
+        <p class="card-footer-text">
+          Ver detalhes na página de <strong>Alunos</strong>.
+        </p>
+      </div>
+
+      <!-- Card 3: Conteúdos mais usados -->
+      <div class="dashboard-card">
+        <div class="card-header">
+          <h2>Conteúdos mais usados esta semana</h2>
+          <span class="card-subtitle">Centro de estudos vs aplicação</span>
+        </div>
+        <ul class="dashboard-list">
+          <li class="dashboard-list-item">
+            <div class="dash-left">
+              <span class="content-pill pill-centro">Centro</span>
+              <span class="dash-text-strong">Fichas de revisão de frações</span>
+            </div>
+            <span class="dash-text-muted">12 utilizações</span>
+          </li>
+          <li class="dashboard-list-item">
+            <div class="dash-left">
+              <span class="content-pill pill-app">App</span>
+              <span class="dash-text-strong">Laboratório Interativo de Funções</span>
+            </div>
+            <span class="dash-text-muted">7 utilizações</span>
+          </li>
+          <li class="dashboard-list-item">
+            <div class="dash-left">
+              <span class="content-pill pill-centro">Centro</span>
+              <span class="dash-text-strong">Resumo: Revolução Francesa</span>
+            </div>
+            <span class="dash-text-muted">5 utilizações</span>
+          </li>
+        </ul>
+        <p class="card-footer-text">
+          Gerir conteúdos na página de <strong>Conteúdos</strong>.
+        </p>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    // Pequeno detalhe: mostrar a data de hoje no subtítulo do card de aulas
+    const todayLabel = document.getElementById('today-label');
+    const today = new Date();
+    const formatter = new Intl.DateTimeFormat('pt-PT', {
+      weekday: 'long',
+      day: '2-digit',
+      month: '2-digit'
+    });
+    todayLabel.textContent = formatter.format(today); // ex: "quinta-feira, 21/11"
+  </script>
+</body>
+</html>

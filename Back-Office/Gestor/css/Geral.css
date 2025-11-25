@@ -1,0 +1,277 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    display: flex;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f5f6fa;
+    height: 100vh;
+  }
+  
+  /* Sidebar */
+  .sidebar {
+    width: 250px;
+    height: 100vh;
+    background-color: #ffffff;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 0 20px 20px 0;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
+  
+  .logo {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  .logo img {
+    width: 120px;
+    height: auto;
+    margin-bottom: 10px;
+  }
+  
+  nav ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  nav ul li {
+    margin-bottom: 15px;
+  }
+  
+  nav ul li a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    padding: 10px;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+    font-size: 16px;
+  }
+  
+  nav ul li a:hover,
+  nav ul li a.active {
+    background-color: #e2e8ff;
+    font-weight: bold;
+  }
+  
+  .add-auditoria {
+    margin-top: 20px;
+    padding: 15px 0;
+  }
+  
+  .add-auditoria button {
+    width: 100%;
+    padding: 10px;
+    background-color: #fff;
+    border: 2px solid #aaa;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  
+  .add-auditoria button:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .user-info {
+    padding-top: 20px;
+    border-top: 1px solid #e0e0e0;
+    text-align: left;
+    font-size: 14px;
+    color: #555;
+  }
+  
+  .user-info p:first-child {
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 5px;
+  }
+  
+  /* Conteúdo principal */
+/* ===== Página Geral / Dashboard ===== */
+
+
+.content {
+  position: relative;
+  margin-left: 260px;            /* espaço ocupado pela sidebar */
+  padding: 32px 40px;
+  background-color: #f5f6fa;
+  min-height: 100vh;
+  width: calc(100% - 260px);
+  box-sizing: border-box;
+}
+
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1.5fr);
+  gap: 16px;
+}
+
+/* primeiro card ocupa a largura toda */
+.card-next-classes {
+  grid-column: 1 / -1;
+}
+
+.dashboard-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 16px 18px;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
+  box-sizing: border-box;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 10px;
+  gap: 8px;
+}
+
+.card-header h2 {
+  font-size: 18px;
+  margin: 0;
+}
+
+.card-subtitle {
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+/* Próximas aulas */
+.next-classes-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.next-class-item {
+  padding: 8px 6px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+}
+
+.next-class-main {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.next-class-time {
+  font-weight: 700;
+  font-size: 14px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: #eff6ff;
+  color: #1d4ed8;
+  min-width: 54px;
+  text-align: center;
+}
+
+.next-class-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.next-class-title {
+  margin: 0;
+  font-size: 14px;
+}
+
+.next-class-meta {
+  margin: 1px 0 0;
+  font-size: 12px;
+  color: #64748b;
+}
+
+/* Listas de mensagens e conteúdos */
+.dashboard-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.dashboard-list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 4px;
+}
+
+.dash-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dash-text-strong {
+  font-size: 14px;
+}
+
+.dash-text-muted {
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+/* Reaproveita o message-dot da página de alunos */
+.message-dot-muted {
+  background: #cbd5e1;
+}
+
+/* Pílulas de origem de conteúdo (aproveita as da página de Conteúdos) */
+.content-pill {
+  padding: 3px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+/* já tens .pill-centro e .pill-app definidos, se não tiveres copia-os: */
+.pill-centro {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.pill-app {
+  background: #e0f2fe;
+  color: #075985;
+}
+
+.card-footer-text {
+  margin-top: 10px;
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+/* Responsivo */
+@media (max-width: 900px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card-next-classes {
+    grid-column: auto;
+  }
+}

@@ -1,0 +1,396 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    display: flex;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f5f6fa;
+    height: 100vh;
+  }
+  
+  /* Sidebar */
+  .sidebar {
+    width: 250px;
+    height: 100vh;
+    background-color: #ffffff;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 0 20px 20px 0;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
+  
+  .logo {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  .logo img {
+    width: 120px;
+    height: auto;
+    margin-bottom: 10px;
+  }
+  
+  nav ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  nav ul li {
+    margin-bottom: 15px;
+  }
+  
+  nav ul li a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    padding: 10px;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+    font-size: 16px;
+  }
+  
+  nav ul li a:hover,
+  nav ul li a.active {
+    background-color: #e2e8ff;
+    font-weight: bold;
+  }
+  
+  .add-auditoria {
+    margin-top: 20px;
+    padding: 15px 0;
+  }
+  
+  .add-auditoria button {
+    width: 100%;
+    padding: 10px;
+    background-color: #fff;
+    border: 2px solid #aaa;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  
+  .add-auditoria button:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .user-info {
+    padding-top: 20px;
+    border-top: 1px solid #e0e0e0;
+    text-align: left;
+    font-size: 14px;
+    color: #555;
+  }
+  
+  .user-info p:first-child {
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 5px;
+  }
+  
+/* ===== Página de Detalhe do Aluno ===== */
+
+.content {
+  position: relative;
+  margin-left: 260px;            /* espaço ocupado pela sidebar */
+  padding: 32px 40px;
+  background-color: #f5f6fa;
+  min-height: 100vh;
+  width: calc(100% - 260px);
+  box-sizing: border-box;
+}
+
+
+/* Header do aluno */
+.student-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+  margin-bottom: 28px;
+}
+
+.student-header-left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.student-avatar-big {
+  width: 52px;
+  height: 52px;
+  border-radius: 999px;
+  background: #dbeafe;
+  color: #1d4ed8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.student-info-line {
+  margin: 2px 0;
+  color: #64748b;
+}
+
+.student-info-sub {
+  margin: 0;
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+.student-header-stats {
+  display: flex;
+  gap: 18px;
+}
+
+.student-stat {
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: #0f172a;
+  color: #e5e7eb;
+  min-width: 130px;
+}
+
+.student-stat-label {
+  display: block;
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+.student-stat-value {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* GRID PRINCIPAL */
+.student-detail-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 2.2fr) minmax(0, 1.2fr);
+  gap: 28px;
+  margin-top: 25px;
+}
+
+/* Painéis */
+.student-panel {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 20px 22px;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+  margin-bottom: 20px;
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 14px;
+  gap: 8px;
+}
+
+.panel-header h2 {
+  font-size: 18px;
+  margin: 0;
+}
+
+.panel-subtitle {
+  font-size: 13px;
+  color: #94a3b8;
+}
+
+/* MENSAGENS */
+.messages-thread {
+  max-height: 360px;
+  overflow-y: auto;
+  padding-right: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.message-bubble {
+  max-width: 80%;
+  padding: 10px 14px;
+  font-size: 14px;
+  border-radius: 12px;
+  position: relative;
+}
+
+.message-student {
+  align-self: flex-start;
+  background: #e5e7eb;
+  border-bottom-left-radius: 3px;
+}
+
+.message-teacher {
+  align-self: flex-end;
+  background: #dbeafe;
+  border-bottom-right-radius: 3px;
+}
+
+.message-text {
+  margin: 0 0 6px;
+}
+
+.message-time {
+  font-size: 11px;
+  color: #6b7280;
+  text-align: right;
+}
+
+/* EXERCÍCIOS DA SEMANA */
+.exercise-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.exercise-numbers {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+}
+
+.exercise-done {
+  color: #16a34a;
+  font-weight: 600;
+}
+
+.exercise-remaining {
+  color: #dc2626;
+  font-weight: 600;
+}
+
+.exercise-progress-bar {
+  width: 100%;
+  height: 12px;
+  border-radius: 999px;
+  background: #e5e7eb;
+  overflow: hidden;
+}
+
+.exercise-progress-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #22c55e, #16a34a);
+  width: 0%;
+  transition: width 0.3s ease;
+  position: relative;
+}
+
+.exercise-progress-fill::after {
+  content: attr(data-percent);
+  position: absolute;
+  right: 4px;
+  top: -18px;
+  font-size: 11px;
+  color: #16a34a;
+}
+
+.exercise-hint {
+  font-size: 12px;
+  color: #94a3b8;
+  margin: 0;
+}
+
+/* DIFICULDADES */
+.difficulties-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.difficulty-item {
+  font-size: 14px;
+}
+
+.difficulty-top {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.difficulty-topic {
+  font-weight: 600;
+}
+
+.difficulty-percent {
+  color: #ef4444;
+  font-weight: 700;
+}
+
+.difficulty-bar {
+  width: 100%;
+  height: 10px;
+  border-radius: 999px;
+  background: #e5e7eb;
+}
+
+.difficulty-bar-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #f97316, #ef4444);
+}
+
+/* PRÓXIMA AULA */
+.next-lesson-box {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 14px;
+}
+
+.next-lesson-time {
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.next-lesson-subject {
+  font-size: 14px;
+}
+
+.next-lesson-mode {
+  font-size: 13px;
+  color: #64748b;
+}
+
+.next-lesson-empty {
+  font-size: 14px;
+  color: #94a3b8;
+}
+
+/* RESPONSIVO */
+@media (max-width: 900px) {
+  .student-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .student-header-stats {
+    width: 100%;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .student-detail-grid {
+    grid-template-columns: 1fr;
+  }
+}

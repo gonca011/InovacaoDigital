@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Log in - EyesEverywhere</title>
+    <link rel="stylesheet" href="/Back-Office/Gestor/css/Registar_google.css">
+    <link rel="icon" href="/Back-Office/Gestor/Imagens/Logo GEE.png" type="image/x-icon">
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-box">
+            <img src="/Back-Office/Gestor/Imagens/Logo GEE.png" alt="EyesEverywhere" class="logo">
+            <h2>Porque cuidar do que é público é cuidar de todos</h2>
+
+            <!-- Formulário de login manual -->
+            <form onsubmit="return validarLogin(event)">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" placeholder="info@xyz.com" required>
+
+                <label for="password">Palavra-passe:</label>
+                <input type="password" id="password" name="password" placeholder="xxxxxxxxxx" required>
+
+                <button type="submit" class="login-btn">Log in</button>
+            </form>
+
+            <!-- Google Sign-In -->
+            <div class="google-login">
+                <div id="g_id_onload"
+                    data-client_id="723281601761-a8uc1h6aftjl6sn6jdbtc2h7o07no9dm.apps.googleusercontent.com"
+                    data-callback="handleCredentialResponse">
+                </div>
+                <div id="g_id_signin" data-type="standard" data-size="large" data-width="300"></div>
+            </div>
+        </div>
+
+        <!-- Imagem lateral -->
+        <div class="image-container"></div>
+    </div>
+
+    <script>
+        const emailAutorizado = ["ljvieirafernandes@gmail.com", "edunas04@gmail.com", "joaninharibeiro2004@gmail.com", "gpiaia@hotmail.com", "franciscaribeiro200@gmail.com", "raquel.pereira.cardoso@gmail.com"];
+        const senhaAutorizada = "1234567890";
+
+        // Validação do formulário tradicional
+        function validarLogin(event) {
+            event.preventDefault();
+
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+
+            if (emailAutorizado.includes(email) && password === senhaAutorizada) {
+                window.location.href = "Ocorrencias.html";
+            } else {
+                alert("Credenciais inválidas.");
+            }
+
+            return false;
+        }
+
+        // Validação do login via Google
+        function handleCredentialResponse(response) {
+            const data = JSON.parse(atob(response.credential.split('.')[1]));
+            const emailGoogle = data.email;
+            const nomeGoogle = data.name;
+
+            if (emailAutorizado.includes(emailGoogle)) {
+                alert(`Bem-vindo, ${data.name}!`);
+
+                // Armazenando nome e email no localStorage
+                localStorage.setItem("userName", nomeGoogle);
+                localStorage.setItem("userEmail", emailGoogle);
+
+                window.location.href = "Ocorrencias.html";  // Ou a página desejada
+            } else {
+                alert("Este email não está autorizado a fazer login.");
+            }
+        }
+
+        // Inicialização do botão Google
+        window.onload = function () {
+            google.accounts.id.initialize({
+                client_id: "723281601761-a8uc1h6aftjl6sn6jdbtc2h7o07no9dm.apps.googleusercontent.com",
+                callback: handleCredentialResponse
+            });
+
+            google.accounts.id.renderButton(
+                document.getElementById("g_id_signin"),
+                {
+                    theme: "outline",
+                    size: "large",
+                    width: "300"
+                }
+            );
+        };
+    </script>
+</body>
+</html>

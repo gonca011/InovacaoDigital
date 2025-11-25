@@ -1,0 +1,94 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to top, #FF9279, #BCC9E9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.login-container {
+    display: flex;
+    width: 80%;
+    max-width: 900px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+}
+
+/* Estiliza a área do formulário */
+.login-box {
+    width: 50%;
+    padding: 40px;
+    text-align: center;
+}
+
+.logo {
+    width: 80px;
+    margin-bottom: 10px;
+}
+
+h2 {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    text-align: left;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.login-btn {
+    background: navy;
+    color: white;
+    width: 70%;
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+    margin-top: 30px;
+    cursor: pointer;
+}
+
+/* Estilizando a opção Google */
+.google-login {
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+}
+
+.google-btn {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 10px 50px;
+    font-size: 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.google-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+/* Estilizando a imagem do lado direito */
+.image-container {
+    width: 50%;
+    background: url('/Front-Office/imagens/sunset.png') no-repeat center center;
+    background-size: cover;
+}
