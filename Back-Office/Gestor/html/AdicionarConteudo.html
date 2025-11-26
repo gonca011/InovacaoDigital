@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Plano de Auditoria</title>
+  <link rel="stylesheet" href="/Back-Office/Gestor/css/PlanoAuditoria.css">
+  <link rel="icon" href="/Back-Office/Gestor/Imagens/Logo GEE.png" type="image/x-icon" />
+</head>
+
+<body>
+  <div class="sidebar">
+    <div class="logo">
+      <img src="/Back-Office/Gestor/Imagens/Logo GEE.png" alt="EyesEverywhere" />
+    </div>
+    <nav>
+      <ul>
+        <li><a data-page="Geral.html" href="Geral.html">🔍 Estatísticas</a></li>
+        <li><a data-page="Ocorrencias.html" href="Ocorrencias.html">📋 Ocorrências</a></li>
+        <li><a data-page="NovasOcorrencias.html" href="NovasOcorrencias.html">➕ Novas Ocorrências</a></li>
+        <li><a data-page="Peritos.html" href="Peritos.html">👥 Peritos</a></li>
+        <li><a data-page="Registar_Peritos.html" href="Registar_Peritos.html">📝 Registar Peritos</a></li>
+        
+      </ul>
+    </nav>
+    <div class="add-auditoria">
+      <a href="PlanoAuditoria.html">
+        <button>+ Adicionar Conteúdo</button>
+      </a>
+    </div>
+    <div class="user-info">
+      <p id="user-name">Utilizador não logado</p>
+      <p id="user-email">Sem e-mail</p>
+    </div>
+  </div>
+
+  <div class="content">
+    <header>
+      <h1>Plano de Auditoria</h1>
+      <p>Preencha o plano com as informações necessárias</p>
+    </header>
+
+    <form id="form-auditoria" class="form-auditoria">
+      <section class="detalhes-auditoria">
+        <h2>Detalhes da Auditoria</h2>
+        <label for="nome"> Nome <span style="color: red;" title="Este campo é obrigatório">*</span> </label>
+        <input type="text" id="nome" name="nome" required>
+
+        <label for="tipo">Tipo de Ocorrência <span style="color: red;" title="Este campo é obrigatório">*</span> </label>
+        <input type="text" id="tipo" name="tipo" required>
+
+        <label for="origem">Origem  <span style="color: red;" title="Este campo é obrigatório">*</span> </label>
+        <select id="origem" name="origem" required>
+          <option value="">-- Selecione a origem --</option>
+          <option value="Interno">Interna</option>
+          <option value="Externo">Externa</option>
+        </select>
+      </section>
+
+      <section class="localizacao">
+        <h2>Localização</h2>
+        <label for="morada">Morada  <span style="color: red;" title="Este campo é obrigatório">*</span> </label>
+        <input type="text" id="morada" name="morada" required>
+
+        <label for="localidade">Localidade  <span style="color: red;" title="Este campo é obrigatório">*</span> </label>
+        <input type="text" id="localidade" name="localidade" required>
+
+        <label for="codigo-postal">Código Postal  <span style="color: red;" title="Este campo é obrigatório">*</span> </label>
+        <input type="text" id="codigo-postal" name="codigo-postal" required>
+      </section>
+
+      <section class="data-hora">
+        <h2>Dia e Hora</h2>
+        <label for="data">Data  <span style="color: red;" title="Este campo é obrigatório">*</span></label>
+        <input type="date" id="data" name="data" required>
+
+        <label for="hora-inicio">Início  <span style="color: red;" title="Este campo é obrigatório">*</span> </label>
+        <input type="time" id="hora-inicio" name="hora-inicio" required>
+
+        <label for="tempo-previsto">Tempo Previsto (horas)  <span style="color: red;" title="Este campo é obrigatório">*</span> </label>
+        <input type="number" id="tempo-previsto" name="tempo-previsto" min="1" step="1" placeholder="Ex: 100" required>
+
+      </section>
+
+      <section class="equipe-materiais">
+        <h2>Equipe e Materiais</h2>
+        <label for="qtd-peritos">Selecione qtd. Peritos  <span style="color: red;" title="Este campo é obrigatório">*</span> </label>
+        <select id="qtd-peritos" name="qtd-peritos" required>
+          <option value="0">Selecione Qtd.</option>
+          <option value="1">1 Perito</option>
+          <option value="2">2 Peritos</option>
+          <option value="3">3 Peritos</option>
+        </select>
+
+        <!-- Div para os campos de peritos -->
+        <div id="peritos-container"></div>
+
+        <!-- NOVO: Lista dinâmica de Materiais -->
+        <label>Materiais</label>
+        <div id="materiais-lista"></div>
+        <button type="button" id="add-material">+ Adicionar Material</button>
+        <p>Total Materiais: <span id="total-materiais">0.00</span> €</p>
+
+        <!-- NOVO: Lista dinâmica de Equipamentos -->
+        <label>Equipamentos</label>
+        <div id="equipamentos-lista"></div>
+        <button type="button" id="add-equipamento">+ Adicionar Equipamento</button>
+        <p>Total Equipamentos: <span id="total-equipamentos">0.00</span> €</p>
+
+        <label for="info-extra">Informações extras</label>
+        <textarea id="info-extra" name="info-extra"></textarea>
+      </section>
+
+      <!-- Gravidade -->
+      <section class="gravidade-section" style="margin-top: 20px; margin-bottom: 20px;">
+        <label>Gravidade da Ocorrência:</label>
+        <div id="gravidade-container" style="display: flex; gap: 10px; margin-top: 8px;">
+          <div class="gravidade-bola" data-valor="1" title="Gravidade 1" style="width: 24px; height: 24px; border-radius: 50%; background-color: #ddd; cursor: pointer;"></div>
+          <div class="gravidade-bola" data-valor="2" title="Gravidade 2" style="width: 24px; height: 24px; border-radius: 50%; background-color: #ddd; cursor: pointer;"></div>
+          <div class="gravidade-bola" data-valor="3" title="Gravidade 3" style="width: 24px; height: 24px; border-radius: 50%; background-color: #ddd; cursor: pointer;"></div>
+          <div class="gravidade-bola" data-valor="4" title="Gravidade 4" style="width: 24px; height: 24px; border-radius: 50%; background-color: #ddd; cursor: pointer;"></div>
+          <div class="gravidade-bola" data-valor="5" title="Gravidade 5" style="width: 24px; height: 24px; border-radius: 50%; background-color: #ddd; cursor: pointer;"></div>
+        </div>
+        <input type="hidden" id="gravidade-selecionada" value="1" />
+      </section>
+
+      <button type="submit" class="btn-confirmar">Confirmar</button>
+    </form>
+  </div>
+
+  <div id="feedback-message" class="feedback-message"></div>
+
+  <script>
+    // Função para atualizar as informações do utilizador
+    function atualizarUtilizador() {
+      const nome = localStorage.getItem("userName") || "Utilizador não logado";
+      const email = localStorage.getItem("userEmail") || "Sem e-mail";
+      document.getElementById("user-name").innerText = nome;
+      document.getElementById("user-email").innerText = email;
+    }
+  
+    // Função para carregar os dados da ocorrência e preencher no formulário
+    function carregarDetalhesOcorrencia() {
+      const ocorrencias = JSON.parse(localStorage.getItem("ocorrencias")) || [];
+      const ocorrenciaID = localStorage.getItem("ocorrenciaID");
+      const ocorrencia = ocorrencias.find(ocorrencia => ocorrencia.id == ocorrenciaID);
+  
+      if (ocorrencia) {
+        document.getElementById("tipo").value = ocorrencia.tipo;
+        document.getElementById("morada").value = ocorrencia.morada;
+        document.getElementById("localidade").value = ocorrencia.cidade;
+        document.getElementById("codigo-postal").value = ocorrencia.codigoPostal || '';
+        document.getElementById("data").value = ocorrencia.data;
+        document.getElementById("hora-inicio").value = ocorrencia.hora;
+      }
+    }
+
+    function carregarPeritos() {
+      const peritos = JSON.parse(localStorage.getItem("peritos")) || [];
+      const peritosSelect = document.getElementById("qtd-peritos");
+      const peritosContainer = document.getElementById("peritos-container");
+
+      peritosSelect.addEventListener("change", function () {
+        const qtdPeritos = parseInt(peritosSelect.value);
+        peritosContainer.innerHTML = "";
+
+        for (let i = 0; i < qtdPeritos; i++) {
+          const wrapper = document.createElement("div");
+          wrapper.classList.add("perito-wrapper");
+
+          const label = document.createElement("label");
+          label.textContent = `Perito ${i + 1}`;
+          wrapper.appendChild(label);
+
+          const select = document.createElement("select");
+          select.name = `perito-${i + 1}`;
+          select.required = true;
+
+          const defaultOption = document.createElement("option");
+          defaultOption.value = "";
+          defaultOption.textContent = "-- Selecionar Perito --";
+          select.appendChild(defaultOption);
+
+          peritos.forEach((perito, idx) => {
+            if (perito.estado === "desocupado") {
+              const option = document.createElement("option");
+              option.value = idx;
+              option.textContent = `${perito.nome} (${perito.especialidade})`;
+              select.appendChild(option);
+            }
+          });
+
+          wrapper.appendChild(select);
+          peritosContainer.appendChild(wrapper);
+        }
+      });
+    }
+
+    // Seleção da gravidade
+    const bolas = document.querySelectorAll(".gravidade-bola");
+    const inputGravidade = document.getElementById("gravidade-selecionada");
+
+    function atualizarVisualGravidade(valorSelecionado) {
+      bolas.forEach(bola => {
+        const valor = bola.getAttribute("data-valor");
+        if (parseInt(valor) <= valorSelecionado) {
+          bola.style.backgroundColor = "#0088FE"; // Cor azul para selecionado
+        } else {
+          bola.style.backgroundColor = "#ddd"; // Cinzento para não selecionado
+        }
+      });
+    }
+
+    bolas.forEach(bola => {
+      bola.addEventListener("click", () => {
+        const valor = parseInt(bola.getAttribute("data-valor"));
+        inputGravidade.value = valor;
+        atualizarVisualGravidade(valor);
+      });
+    });
+
+    // Inicializa com gravidade 1 selecionada
+    atualizarVisualGravidade(1);
+
+// Materiais disponíveis (português de Portugal)
+const materiaisDisponiveis = [
+  { id: 'cimento', nome: 'Cimento', preco: 5.00 },
+  { id: 'areia', nome: 'Areia', preco: 3.00 },
+  { id: 'tinta', nome: 'Tinta', preco: 8.00 },
+  { id: 'brita', nome: 'Pedra Britada', preco: 4.50 },
+  { id: 'tubos_pvc', nome: 'Tubos PVC', preco: 2.50 },
+  { id: 'cimento_rapido', nome: 'Cimento Rápido', preco: 6.00 },
+  { id: 'ferro', nome: 'Ferro', preco: 10.00 },
+  { id: 'areia_fina', nome: 'Areia Fina', preco: 3.50 },
+  { id: 'cimento_branco', nome: 'Cimento Branco', preco: 7.00 },
+  { id: 'cimento_colante', nome: 'Cimento Colante', preco: 9.00 },
+  { id: 'pavimento_asfaltico', nome: 'Pavimento Asfáltico', preco: 15.00 },
+  { id: 'cimento_alvenaria', nome: 'Cimento Portland', preco: 5.50 },
+  { id: 'argamassa', nome: 'Argamassa', preco: 4.00 },
+  { id: 'tijolos', nome: 'Tijolos', preco: 0.50 },
+  { id: 'revestimento', nome: 'Revestimento', preco: 12.00 }
+];
+
+// Equipamentos disponíveis (português de Portugal)
+const equipamentosDisponiveis = [
+  { id: 'capacete', nome: 'Capacete', preco: 15.00 },
+  { id: 'luvas', nome: 'Luvas', preco: 4.50 },
+  { id: 'colete', nome: 'Colete Refletor', preco: 20.00 },
+  { id: 'andaime', nome: 'Andaime', preco: 50.00 },
+  { id: 'maquina_asfalto', nome: 'Máquina de Asfalto', preco: 200.00 },
+  { id: 'betoneira', nome: 'Betoneira', preco: 75.00 },
+  { id: 'serra_circular', nome: 'Serra Circular', preco: 60.00 },
+  { id: 'serra_metal', nome: 'Serra para Metal', preco: 55.00 },
+  { id: 'martelo', nome: 'Martelo', preco: 10.00 },
+  { id: 'nivel', nome: 'Nível de Bolha', preco: 18.00 },
+  { id: 'pa', nome: 'Pá', preco: 12.00 },
+  { id: 'rolo_compactador', nome: 'Rolo Compactador', preco: 300.00 },
+  { id: 'escavadora', nome: 'Escavadora', preco: 500.00 },
+  { id: 'cilindro', nome: 'Cilindro Compactador', preco: 350.00 },
+  { id: 'extintor', nome: 'Extintor', preco: 30.00 }
+];
+
+    // Referências DOM
+    const materiaisLista = document.getElementById('materiais-lista');
+    const addMaterialBtn = document.getElementById('add-material');
+    const totalMateriaisSpan = document.getElementById('total-materiais');
+
+    const equipamentosLista = document.getElementById('equipamentos-lista');
+    const addEquipamentoBtn = document.getElementById('add-equipamento');
+    const totalEquipamentosSpan = document.getElementById('total-equipamentos');
+
+    // Guardar estado
+    let materiaisSelecionados = [];
+    let equipamentosSelecionados = [];
+
+    // Função para criar item na lista (material ou equipamento)
+    function criarItem(listaDisponivel, container, arraySelecionado) {
+      // Cria um div com select e input quantidade
+      const itemDiv = document.createElement('div');
+      itemDiv.classList.add('item-lista');
+
+      // Select para escolher o item
+      const select = document.createElement('select');
+      listaDisponivel.forEach(item => {
+        const option = document.createElement('option');
+        option.value = item.id;
+        option.textContent = `${item.nome} (€${item.preco.toFixed(2)})`;
+        select.appendChild(option);
+      });
+
+      // Input quantidade
+      const inputQtd = document.createElement('input');
+      inputQtd.type = 'number';
+      inputQtd.min = '1';
+      inputQtd.value = '1';
+
+      // Botão remover
+      const btnRemover = document.createElement('button');
+      btnRemover.type = 'button';
+      btnRemover.textContent = 'Remover';
+
+      btnRemover.addEventListener('click', () => {
+        container.removeChild(itemDiv);
+        // Atualiza array
+        const index = arraySelecionado.indexOf(itemDiv);
+        if (index > -1) arraySelecionado.splice(index, 1);
+        atualizarTotais();
+        guardarLocalStorage();
+      });
+
+      // Atualiza quantidade e item selecionado ao mudar
+      function atualizarItem() {
+        // Atualiza o objeto no array selecionado
+        const itemInfo = listaDisponivel.find(i => i.id === select.value);
+        const qtd = parseInt(inputQtd.value) || 0;
+        itemDiv.dataset.id = select.value;
+        itemDiv.dataset.qtd = qtd;
+        itemDiv.dataset.preco = itemInfo.preco;
+
+        atualizarTotais();
+        guardarLocalStorage();
+      }
+
+      select.addEventListener('change', atualizarItem);
+      inputQtd.addEventListener('input', atualizarItem);
+
+      itemDiv.appendChild(select);
+      itemDiv.appendChild(inputQtd);
+      itemDiv.appendChild(btnRemover);
+
+      container.appendChild(itemDiv);
+
+      // Guardar referência no array para controlo
+      arraySelecionado.push(itemDiv);
+
+      // Inicializa valores
+      atualizarItem();
+    }
+
+    // Função para calcular e mostrar totais
+    function atualizarTotais() {
+      let totalMateriais = 0;
+      materiaisSelecionados.forEach(div => {
+        const qtd = parseInt(div.dataset.qtd) || 0;
+        const preco = parseFloat(div.dataset.preco) || 0;
+        totalMateriais += qtd * preco;
+      });
+      totalMateriaisSpan.textContent = totalMateriais.toFixed(2);
+
+      let totalEquipamentos = 0;
+      equipamentosSelecionados.forEach(div => {
+        const qtd = parseInt(div.dataset.qtd) || 0;
+        const preco = parseFloat(div.dataset.preco) || 0;
+        totalEquipamentos += qtd * preco;
+      });
+      totalEquipamentosSpan.textContent = totalEquipamentos.toFixed(2);
+    }
+
+    // Guardar os dados em localStorage
+    function guardarLocalStorage() {
+      // Transformar os divs em objetos simples para guardar
+      const materiaisParaGuardar = materiaisSelecionados.map(div => ({
+        id: div.dataset.id,
+        quantidade: parseInt(div.dataset.qtd),
+        precoUnitario: parseFloat(div.dataset.preco)
+      }));
+
+      const equipamentosParaGuardar = equipamentosSelecionados.map(div => ({
+        id: div.dataset.id,
+        quantidade: parseInt(div.dataset.qtd),
+        precoUnitario: parseFloat(div.dataset.preco)
+      }));
+
+      localStorage.setItem('materiaisSelecionados', JSON.stringify(materiaisParaGuardar));
+      localStorage.setItem('equipamentosSelecionados', JSON.stringify(equipamentosParaGuardar));
+    }
+
+    // Carregar do localStorage ao abrir página (se existir)
+    function carregarLocalStorage() {
+      const matSalvos = JSON.parse(localStorage.getItem('materiaisSelecionados')) || [];
+      matSalvos.forEach(item => {
+        criarItem(materiaisDisponiveis, materiaisLista, materiaisSelecionados);
+        // Seleciona o valor correto e quantidade
+        const ultimo = materiaisSelecionados[materiaisSelecionados.length -1];
+        ultimo.querySelector('select').value = item.id;
+        ultimo.querySelector('input').value = item.quantidade;
+        ultimo.dataset.id = item.id;
+        ultimo.dataset.qtd = item.quantidade;
+        ultimo.dataset.preco = item.precoUnitario;
+      });
+
+      const eqpSalvos = JSON.parse(localStorage.getItem('equipamentosSelecionados')) || [];
+      eqpSalvos.forEach(item => {
+        criarItem(equipamentosDisponiveis, equipamentosLista, equipamentosSelecionados);
+        const ultimo = equipamentosSelecionados[equipamentosSelecionados.length -1];
+        ultimo.querySelector('select').value = item.id;
+        ultimo.querySelector('input').value = item.quantidade;
+        ultimo.dataset.id = item.id;
+        ultimo.dataset.qtd = item.quantidade;
+        ultimo.dataset.preco = item.precoUnitario;
+      });
+
+      atualizarTotais();
+    }
+
+    // Eventos para adicionar novos itens
+    addMaterialBtn.addEventListener('click', () => {
+      criarItem(materiaisDisponiveis, materiaisLista, materiaisSelecionados);
+    });
+
+    addEquipamentoBtn.addEventListener('click', () => {
+      criarItem(equipamentosDisponiveis, equipamentosLista, equipamentosSelecionados);
+    });
+
+    // Submissão do formulário de auditoria
+    document.getElementById("form-auditoria").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const peritosSelecionados = [];
+    const selectedPeritosElements = document.querySelectorAll("#peritos-container select");
+    const todosPeritos = JSON.parse(localStorage.getItem("peritos")) || [];
+
+    selectedPeritosElements.forEach(select => {
+      const peritoIndex = parseInt(select.value);
+      const perito = todosPeritos[peritoIndex];
+
+      // Marca como ocupado
+      perito.estado = "ocupado";
+
+      // Guarda apenas os dados relevantes
+      peritosSelecionados.push({
+        nome: perito.nome,
+        especialidade: perito.especialidade,
+        email: perito.email,
+        telefone: perito.telefone,
+        precoHora: parseFloat(perito.precoHora) || 10
+      });
+
+    });
+
+    // Atualiza o localStorage com o novo estado dos peritos
+    localStorage.setItem("peritos", JSON.stringify(todosPeritos));
+
+
+    // Validação: obrigar pelo menos 1 perito
+    if (peritosSelecionados.length === 0) {
+      const feedbackMessage = document.getElementById('feedback-message');
+      feedbackMessage.innerHTML = "Por favor, selecione pelo menos um perito.";
+      feedbackMessage.className = "feedback-message error"; // classe para erro (vermelho)
+      feedbackMessage.style.display = "block";
+      return; // impede submissão
+    }
+
+    // Continua com o resto do teu código normal...
+    // Marca os peritos selecionados como ocupados
+    let peritos = JSON.parse(localStorage.getItem("peritos")) || [];
+    peritos = peritos.map((perito, idx) => {
+      if (peritosSelecionados.includes(idx.toString())) {
+        perito.estado = "ocupado";
+      }
+      return perito;
+    });
+    localStorage.setItem("peritos", JSON.stringify(peritos));
+
+      // Obtem os dados do formulário para criar a ocorrência
+      const nome = document.getElementById("nome").value;
+      const tipo = document.getElementById("tipo").value;
+      const origem = document.getElementById("origem").value;
+      const localizacao = document.getElementById("localidade").value;
+      const codigo_postal = document.getElementById("codigo-postal").value;
+      const morada = document.getElementById("morada").value;
+      const data = document.getElementById("data").value;
+      const hora_inicio = document.getElementById("hora-inicio").value;
+      const tempo_previsto = document.getElementById("tempo-previsto").value;
+      const info_extra = document.getElementById("info-extra").value;
+      const estado = "em-progresso";
+      const gravidade = inputGravidade.value;
+
+      // Dados dos materiais e equipamentos detalhados
+      const materiaisFinal = materiaisSelecionados.map(div => ({
+        id: div.dataset.id,
+        quantidade: parseInt(div.dataset.qtd),
+        precoUnitario: parseFloat(div.dataset.preco)
+      }));
+
+      const equipamentosFinal = equipamentosSelecionados.map(div => ({
+        id: div.dataset.id,
+        quantidade: parseInt(div.dataset.qtd),
+        precoUnitario: parseFloat(div.dataset.preco)
+      }));
+
+      // Cria a nova auditoria
+      const novaAuditoria = {
+        id: Date.now(),
+        nome: nome,
+        problema: tipo,
+        origem: origem,
+        morada: morada,
+        codigo_postal: codigo_postal,
+        hora_inicio: hora_inicio,
+        tempo_previsto: tempo_previsto,
+        info_extra: info_extra,
+        peritos: peritosSelecionados,
+        estado: estado,
+        localizacao: localizacao,
+        data: data,
+        gravidade: gravidade,
+        materiaisDetalhados: materiaisFinal,
+        equipamentosDetalhados: equipamentosFinal,
+        totalMateriais: materiaisFinal.reduce((acc, cur) => acc + cur.quantidade * cur.precoUnitario, 0),
+        totalEquipamentos: equipamentosFinal.reduce((acc, cur) => acc + cur.quantidade * cur.precoUnitario, 0)
+      };
+
+      // Atualiza o array de ocorrências no localStorage
+      const auditorias = JSON.parse(localStorage.getItem("auditorias")) || [];
+      auditorias.push(novaAuditoria);
+      localStorage.setItem("auditorias", JSON.stringify(auditorias));
+
+      // Remove a ocorrência aprovada da lista de ocorrências pendentes
+      let ocorrencias = JSON.parse(localStorage.getItem("ocorrencias")) || [];
+      const ocorrenciaID = localStorage.getItem("ocorrenciaID");
+      ocorrencias = ocorrencias.filter(ocorrencia => ocorrencia.id != ocorrenciaID);
+      localStorage.setItem("ocorrencias", JSON.stringify(ocorrencias));
+
+      // Mostrar mensagem de sucesso e redirecionar
+      const feedbackMessage = document.getElementById('feedback-message');
+      feedbackMessage.innerHTML = "Plano de Auditoria confirmado com sucesso!";
+      feedbackMessage.classList.add("success");
+      feedbackMessage.style.display = "block";
+
+      setTimeout(() => {
+        window.location.href = "Ocorrencias.html"; // Redireciona para Ocorrências
+      }, 2000);
+    });
+
+    // Ao carregar a página
+    document.addEventListener("DOMContentLoaded", function() {
+      atualizarUtilizador();
+      carregarDetalhesOcorrencia();
+      carregarPeritos();
+      carregarLocalStorage();
+    });
+  </script>
+
+</body>
+</html>
