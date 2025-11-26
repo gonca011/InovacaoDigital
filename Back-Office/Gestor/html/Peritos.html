@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Peritos - EyesEverywhere</title>
+  <link rel="stylesheet" href="/Back-Office/Gestor/css/Peritos.css" />
+  <link rel="icon" href="/Back-Office/Gestor/Imagens/Logo GEE.png" type="image/x-icon" />
+</head>
+
+<body>
+  <div class="sidebar">
+    <div class="logo">
+      <img src="/Back-Office/Gestor/Imagens/Logo GEE.png" alt="EyesEverywhere" />
+    </div>
+    <nav>
+      <ul>
+        <li><a data-page="Geral.html" href="Geral.html">🔍 Estatísticas</a></li>
+        <li><a data-page="Ocorrencias.html" href="Ocorrencias.html">📋 Ocorrências</a></li>
+        <li><a data-page="NovasOcorrencias.html" href="NovasOcorrencias.html">➕ Novas Ocorrências</a></li>
+        <li><a class="active" data-page="Peritos.html" href="Peritos.html">👥 Peritos</a></li>
+        <li><a data-page="Registar_Peritos.html" href="Registar_Peritos.html">📝 Registar Peritos</a></li>
+        
+      </ul>
+    </nav>
+    <div class="add-auditoria">
+      <a href="/Back-Office/Gestor/html/PlanoAuditoria.html">
+        <button>+ Adicionar Conteúdo</button>
+      </a>
+    </div>
+    <div class="user-info">
+      <p id="user-name"></p>
+      <p id="user-email"></p>
+    </div>
+  </div>
+
+  <div class="content">
+    <header>
+      <h1>Peritos</h1>
+      <div style="display:flex; gap: 20px; align-items: center;">
+        <label for="filtroEspecialidade">Filtrar por especialidade:</label>
+        <select id="filtroEspecialidade">
+          <option value="todos">Todas</option>
+        </select>
+
+        <label for="ordenarPor">Ordenar por:</label>
+        <select id="ordenarPor">
+          <option value="id">Padrão</option>
+          <option value="estado">Estado</option>
+          <option value="nome">Nome</option>
+        </select>
+      </div>
+    </header>
+
+    <main>
+      <section class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Nome</th>
+              <th>Especialidade</th>
+              <th>Email</th>
+              <th>Telemóvel</th>
+              <th>€/Hora</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="tabela-peritos"></tbody>
+        </table>
+      </section>
+    </main>
+  </div>
+
+  <div id="editModal" class="modal" style="display:none;">
+    <div class="modal-content">
+      <h3>Editar Perito</h3>
+      <form id="editForm">
+        <label>Nome:<input type="text" id="edit-nome" required></label><br>
+        <label>Especialidade:<input type="text" id="edit-especialidade" required></label><br>
+        <label>Preço por Hora (€):<input type="number" id="edit-precoHora" min="0" step="0.01" required></label><br>
+        <label>Email:<input type="email" id="edit-email" required></label><br>
+        <label>Telemóvel:<input type="tel" id="edit-telefone" required></label><br>
+        <button type="submit">Salvar</button>
+        <button type="button" id="cancelEdit">Cancelar</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="feedback-message" class="feedback-message"></div>
+
+  <script>
+    const tbody = document.getElementById("tabela-peritos");
+    const feedbackMessage = document.getElementById('feedback-message');
+    let peritos = JSON.parse(localStorage.getItem("peritos")) || [];
+
+    function renderPeritos() {
+      const filtroEspecialidade = document.getElementById('filtroEspecialidade').value;
+      const ordenarPor = document.getElementById('ordenarPor').value;
+
+      let filtrados = peritos.filter(perito => {
+        if (filtroEspecialidade === 'todos') return true;
+        return perito.especialidade === filtroEspecialidade;
+      });
+
+      if (ordenarPor === 'estado') {
+        filtrados.sort((a, b) => {
+          if (a.estado === b.estado) return 0;
+          return a.estado === 'ocupado' ? -1 : 1;
+        });
+      } else if (ordenarPor === 'nome') {
+        filtrados.sort((a, b) => a.nome.localeCompare(b.nome));
+      }
+
+      tbody.innerHTML = "";
+      filtrados.forEach((perito, index) => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${index + 1}</td>
+          <td>${perito.nome}</td>
+          <td>${perito.especialidade}</td>
+          <td>${perito.email}</td>
+          <td>${perito.telefone}</td>
+          <td>€${(perito.precoHora || 10).toFixed(2)}</td>
+          <td>
+            <button onclick="editarPerito(${index})">✏️</button>
+            <button onclick="confirmarRemoverPerito(${index})">🗑️</button>
+            <button onclick="ocuparPerito(${index})" ${perito.estado === "ocupado" ? "disabled" : ""}>Ocupar</button>
+            <button onclick="desocuparPerito(${index})" ${perito.estado === "desocupado" ? "disabled" : ""}>Desocupar</button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function editarPerito(index) {
+      editIndex = index;
+      const p = peritos[index];
+      document.getElementById('edit-nome').value = p.nome;
+      document.getElementById('edit-especialidade').value = p.especialidade;
+      document.getElementById('edit-precoHora').value = p.precoHora || 10;
+      document.getElementById('edit-email').value = p.email;
+      document.getElementById('edit-telefone').value = p.telefone;
+      document.getElementById('editModal').style.display = 'flex';
+    }
+
+    document.getElementById('editForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const nome = document.getElementById('edit-nome').value.trim();
+      const especialidade = document.getElementById('edit-especialidade').value.trim();
+      const precoHora = parseFloat(document.getElementById('edit-precoHora').value);
+      const email = document.getElementById('edit-email').value.trim();
+      const telefone = document.getElementById('edit-telefone').value.trim();
+
+      if (nome && especialidade && email && telefone && !isNaN(precoHora)) {
+        peritos[editIndex] = {
+          ...peritos[editIndex],
+          nome, especialidade, precoHora, email, telefone
+        };
+        localStorage.setItem("peritos", JSON.stringify(peritos));
+        renderPeritos();
+        feedback("Perito atualizado com sucesso.", "success");
+        fecharModal();
+      }
+    });
+
+    function fecharModal() {
+      document.getElementById('editModal').style.display = 'none';
+    }
+
+    function confirmarRemoverPerito(index) {
+      feedbackMessage.innerHTML = `
+        Pretende remover este perito?
+        <button id="btnSim">Sim</button>
+        <button id="btnCancelar">Cancelar</button>
+      `;
+      feedbackMessage.className = 'feedback-message warning';
+      feedbackMessage.style.display = 'flex';
+      document.getElementById('btnSim').onclick = () => {
+        peritos.splice(index, 1);
+        localStorage.setItem("peritos", JSON.stringify(peritos));
+        renderPeritos();
+        feedback("Perito removido com sucesso.", "success");
+      };
+      document.getElementById('btnCancelar').onclick = () => feedbackMessage.style.display = 'none';
+    }
+
+    function ocuparPerito(index) {
+      peritos[index].estado = "ocupado";
+      localStorage.setItem("peritos", JSON.stringify(peritos));
+      renderPeritos();
+    }
+
+    function desocuparPerito(index) {
+      peritos[index].estado = "desocupado";
+      localStorage.setItem("peritos", JSON.stringify(peritos));
+      renderPeritos();
+    }
+
+    function feedback(msg, tipo) {
+      feedbackMessage.innerText = msg;
+      feedbackMessage.className = 'feedback-message ' + tipo;
+      feedbackMessage.style.display = 'flex';
+      setTimeout(() => feedbackMessage.style.display = 'none', 3000);
+    }
+
+    function atualizarUtilizador() {
+      document.getElementById("user-name").innerText = localStorage.getItem("userName") || "Utilizador não logado";
+      document.getElementById("user-email").innerText = localStorage.getItem("userEmail") || "Sem e-mail";
+    }
+
+    function popularFiltroEspecialidade() {
+      const filtro = document.getElementById('filtroEspecialidade');
+      filtro.innerHTML = '<option value="todos">Todas</option>';
+      const especialidades = [...new Set(peritos.map(p => p.especialidade))];
+      especialidades.forEach(espec => {
+        const opt = document.createElement('option');
+        opt.value = espec;
+        opt.textContent = espec;
+        filtro.appendChild(opt);
+      });
+    }
+
+    document.getElementById('cancelEdit').addEventListener('click', fecharModal);
+    document.getElementById('filtroEspecialidade').addEventListener('change', renderPeritos);
+    document.getElementById('ordenarPor').addEventListener('change', renderPeritos);
+
+    document.addEventListener('DOMContentLoaded', () => {
+      atualizarUtilizador();
+      popularFiltroEspecialidade();
+      renderPeritos();
+    });
+  </script>
+</body>
+</html>
