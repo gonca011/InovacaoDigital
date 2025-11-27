@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Detalhe da Ocorrência - EyesEverywhere</title>
+  <title>Conteúdos - LABRATS</title>
   <link rel="stylesheet" href="/Back-Office/Gestor/css/DetalheOcorrencia.css" />
   <link rel="icon" href="/Back-Office/Gestor/Imagens/Logo.png" type="image/x-icon" />
 </head>
 <body>
-  <div class="sidebar">
+  <div class="sidebar" style="background-color: #D8ECFF;">
     <div class="logo">
       <img src="/Back-Office/Gestor/Imagens/Logo.png" alt="EyesEverywhere" />
     </div>
@@ -21,12 +21,12 @@
       </ul>
     </nav>
     <div class="add-auditoria"> 
-      <a href="/Back-Office/Gestor/html/PlanoAuditoria.html">
+      <a href="/Back-Office/Gestor/html/AddConteudos.html">
         <button>+ Adicionar Conteúdos</button>
       </a>
     </div>
     <div class="user-info">
-      <p id="user-name">Utilizador não logado</p>
+      <p id="user-name">Versão MVP</p>
       <p id="user-email">Sem e-mail</p>
     </div>
   </div>
@@ -193,6 +193,7 @@
       filtered.forEach(item => {
         const card = document.createElement('div');
         card.className = 'content-card';
+        card.style.cursor = 'pointer'; // indicar que é clicável
 
         const sourceLabel =
           item.source === 'centro'
@@ -213,6 +214,15 @@
           <h3 class="content-title">${item.title}</h3>
           <p class="content-description">${item.description}</p>
         `;
+
+        // Ao clicar no card, navegar para promo.html
+        // caminho relativo a partir de: InovacaoDigital/Back-Office/Gestor/html/Conteudos.html
+        // até: C:/Users/Gonçalo/InovacaoDigital/html/promo.html -> ../../../html/promo.html
+        card.addEventListener('click', () => {
+          window.location.href = '/Back-Office/Gestor/html/promo.html';
+          // alternativa absoluta (file URL) se necessário:
+          // window.location.href = 'file:///C:/Users/Gonçalo/InovacaoDigital/html/promo.html';
+        });
 
         contentListEl.appendChild(card);
       });

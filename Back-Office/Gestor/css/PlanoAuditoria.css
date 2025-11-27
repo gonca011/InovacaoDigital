@@ -338,3 +338,10 @@ textarea {
     border-color: #2563eb;
     outline: none;
 }
+
+.acordeao-opcoes {
+    display: flex;
+    gap: 20px;
+    margin-top: 10px;
+    stroke: #333;
+}

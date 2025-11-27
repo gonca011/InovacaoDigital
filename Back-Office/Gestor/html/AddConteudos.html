@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Adicionar Conteúdos - LABRATS</title>
+  <link rel="stylesheet" href="/Back-Office/Gestor/css/PlanoAuditoria.css">
+  <link rel="icon" href="/Back-Office/Gestor/Imagens/Logo.png" type="image/x-icon" />
+</head>
+
+<body>
+  <div class="sidebar" style="background-color: #D8ECFF;">
+    <div class="logo">
+      <img src="/Back-Office/Gestor/Imagens/Logo.png" alt="EyesEverywhere" />
+    </div>
+    <nav>
+      <ul>
+      <li><a data-page="Geral.html" href="Geral.html">🏠 Visão Geral</a></li>
+      <li><a data-page="Horario.html" href="Horario.html">🗓️ Horário</a></li>
+      <li><a class="Alunos.html" data-page="Alunos.html" href="Alunos.html">👥 Alunos</a></li>
+      <li><a data-page="Conteudos.html" href="Conteudos.html">📚 Conteúdos</a></li>
+      </ul>
+    </nav>
+    <div class="add-auditoria" ;">
+      <a href="AddConteudos.html">
+        <button>+ Adicionar Conteúdo</button>
+      </a>
+    </div>
+    <div class="user-info">
+      <p id="user-name">Versão MVP</p>
+      <p id="user-email">Sem e-mail</p>
+    </div>
+  </div>
+
+  <div class="content">
+    <header>
+      <h1>Conteúdos</h1>
+      <p>Preencha o conteúdo com as informações necessárias</p>
+    </header>
+
+    <form id="form-auditoria" class="form-auditoria">
+      <section class="detalhes-auditoria">
+        <h2>Detalhes da Disciplina</h2>
+        <label for="nome"> Nome <span style="color: red;" title="Este campo é obrigatório">*</span> </label>
+        <input type="text" id="nome" name="nome" required>
+      </section>
+
+      <section class="localizacao">
+        <h2>Ano de Escolaridade</h2>
+        <label for="codigo-postal">Ano de Escolaridade  <span style="color: red;" title="Este campo é obrigatório">*</span> </label>
+        <input type="text" id="codigo-postal" name="codigo-postal" required>
+      </section>
+
+      <!--Acordeão para, caso selecione "sim" definir data de entrega, caso selecione "não" ocultar -->
+      <div class="acordeao" style="margin-top: 20px; margin-bottom: 20px;">
+        <label>Possui Data de Entrega?</label>
+        <div class="acordeao-opcoes">
+          <input type="radio" id="material-sim" name="material" value="sim">
+          <label for="material-sim">Sim</label>
+
+          <input type="radio" id="material-nao" name="material" value="nao" checked>
+          <label for="material-nao">Não</label>
+        </div>
+      </div>
+      
+      <section class="data-hora">
+        <h2>Dia e Hora</h2>
+        <label for="data">Data  <span style="color: red;" title="Este campo é obrigatório">*</span></label>
+        <input type="date" id="data" name="data" required>
+
+        <label for="hora-inicio">Início  <span style="color: red;" title="Este campo é obrigatório">*</span> </label>
+        <input type="time" id="hora-inicio" name="hora-inicio" required>
+
+        <label for="tempo-previsto">Tempo Previsto (horas)  <span style="color: red;" title="Este campo é obrigatório">*</span> </label>
+        <input type="number" id="tempo-previsto" name="tempo-previsto" min="1" step="1" placeholder="Ex: 100" required>
+
+      </section>
+
+
+      <!-- Gravidade -->
+      <section class="gravidade-section" style="margin-top: 20px; margin-bottom: 20px;">
+        <label>Dificuldade do Exercício:</label>
+        <div id="gravidade-container" style="display: flex; gap: 10px; margin-top: 8px;">
+          <div class="gravidade-bola" data-valor="1" title="Gravidade 1" style="width: 24px; height: 24px; border-radius: 50%; background-color: #ddd; cursor: pointer;"></div>
+          <div class="gravidade-bola" data-valor="2" title="Gravidade 2" style="width: 24px; height: 24px; border-radius: 50%; background-color: #ddd; cursor: pointer;"></div>
+          <div class="gravidade-bola" data-valor="3" title="Gravidade 3" style="width: 24px; height: 24px; border-radius: 50%; background-color: #ddd; cursor: pointer;"></div>
+          <div class="gravidade-bola" data-valor="4" title="Gravidade 4" style="width: 24px; height: 24px; border-radius: 50%; background-color: #ddd; cursor: pointer;"></div>
+          <div class="gravidade-bola" data-valor="5" title="Gravidade 5" style="width: 24px; height: 24px; border-radius: 50%; background-color: #ddd; cursor: pointer;"></div>
+        </div>
+        <input type="hidden" id="gravidade-selecionada" value="1" />
+      </section>
+
+      <button type="submit" class="btn-confirmar">Confirmar</button>
+    </form>
+  </div>
+
+  <div id="feedback-message" class="feedback-message"></div>
+
+  <script>
+    // Função para atualizar as informações do utilizador
+    function atualizarUtilizador() {
+      const nome = localStorage.getItem("userName") || "Versão MVP";
+      const email = localStorage.getItem("userEmail") || "Sem e-mail";
+      document.getElementById("user-name").innerText = nome;
+      document.getElementById("user-email").innerText = email;
+    }
+  
+
+    // Seleção da gravidade
+    const bolas = document.querySelectorAll(".gravidade-bola");
+    const inputGravidade = document.getElementById("gravidade-selecionada");
+
+    function atualizarVisualGravidade(valorSelecionado) {
+      bolas.forEach(bola => {
+        const valor = bola.getAttribute("data-valor");
+        if (parseInt(valor) <= valorSelecionado) {
+          bola.style.backgroundColor = "#0088FE"; // Cor azul para selecionado
+        } else {
+          bola.style.backgroundColor = "#ddd"; // Cinzento para não selecionado
+        }
+      });
+    }
+
+    bolas.forEach(bola => {
+      bola.addEventListener("click", () => {
+        const valor = parseInt(bola.getAttribute("data-valor"));
+        inputGravidade.value = valor;
+        atualizarVisualGravidade(valor);
+      });
+    });
+
+    // Inicializa com gravidade 1 selecionada
+    atualizarVisualGravidade(1);
+
+
+    // Mostrar/ocultar secção "Dia e Hora" conforme escolha em "Possui Material de Apoio?"
+    const materialSim = document.getElementById('material-sim');
+    const materialNao = document.getElementById('material-nao');
+    const dataHoraSection = document.querySelector('.data-hora');
+    const dataInput = document.getElementById('data');
+    const horaInicioInput = document.getElementById('hora-inicio');
+    const tempoPrevistoInput = document.getElementById('tempo-previsto');
+
+    function toggleMaterialFields() {
+      if (materialSim && materialSim.checked) {
+        dataHoraSection.style.display = '';
+        dataInput.required = true;
+        horaInicioInput.required = true;
+        tempoPrevistoInput.required = true;
+      } else {
+        dataHoraSection.style.display = 'none';
+        dataInput.required = false;
+        horaInicioInput.required = false;
+        tempoPrevistoInput.required = false;
+        // limpar valores para evitar submissão indesejada
+        dataInput.value = '';
+        horaInicioInput.value = '';
+        tempoPrevistoInput.value = '';
+      }
+    }
+
+    if (materialSim && materialNao) {
+      materialSim.addEventListener('change', toggleMaterialFields);
+      materialNao.addEventListener('change', toggleMaterialFields);
+    }
+
+    // Ao carregar a página
+    document.addEventListener("DOMContentLoaded", function() {
+     // Inicializa visibilidade com base na opção selecionada
+      toggleMaterialFields();
+      atualizarUtilizador();
+
+      // Submissão do formulário: validação nativa e redirecionamento só quando válido
+      const form = document.getElementById('form-auditoria');
+      if (form) {
+        form.addEventListener('submit', function(e) {
+          e.preventDefault();
+          if (!form.checkValidity()) {
+            form.reportValidity();
+            return;
+          }
+          window.location.href = '/Back-Office/Gestor/html/promo.html';
+        });
+      }
+    });
+  </script>
+
+</body>
+</html>
