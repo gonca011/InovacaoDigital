@@ -1,115 +1,19 @@
 /* ========================================================= */
-/* ====================  LOW BAR DA APP  ==================== */
+/* ===========  ESTILOS ESPECÍFICOS DA ÁREA DO ALUNO ======= */
 /* ========================================================= */
-
-.bottom-nav {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background: #ffeec0; /* creme */
-  padding: 12px 28px 18px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  z-index: 20;
-  box-sizing: border-box;
-}
-
-/* Botões laterais */
-.nav-btn {
-  flex: 1;
-  background: none;
-  border: none;
-  outline: none;
-  text-decoration: none;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 3px;
-  font-size: 11px;
-  font-family: inherit;
-  color: #0b4f8a;
-  cursor: pointer;
-}
-
-.nav-icon {
-  font-size: 20px;
-}
-
-.nav-label {
-  letter-spacing: 0.06em;
-  font-weight: 600;
-  text-transform: uppercase;
-}
-
-/* Botão principal — Perfil */
-.nav-btn-main {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%) translateY(-26px);
-  width: 70px;
-  height: 70px;
-  border-radius: 999px;
-  background: #ffeec0;
-  border: 6px solid #0b4f8a;
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.18);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.nav-btn-main .nav-icon {
-  font-size: 28px;
-}
-
-/* Estado ativo */
-.nav-btn.active .nav-icon,
-.nav-btn.active .nav-label {
-  color: #ff7b2a;
-}
-
-/* Ecrãs muito pequenos */
-@media (max-width: 480px) {
-  .nav-label {
-    display: none;
-  }
-}
-
-
-/* ========================================================= */
-/* ==  A PARTIR DAQUI É O CONTEÚDO ESPECÍFICO DESTA PÁGINA == */
-/* ========================================================= */
-
-/* Fonte base (igual ao resto da app) */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap');
-
-*, *::before, *::after { box-sizing: border-box; }
-html, body { height: 100%; margin: 0; }
-
-html {
-  scrollbar-gutter: stable both-edges;
-}
-
-body {
-  font-family: "Poppins", Arial, Helvetica, sans-serif;
-  background-color: #D8ECFF; /* azul clarinho */
-  color: #0E1B24;
-  -webkit-font-smoothing: antialiased;
-}
-
-/* Estrutura */
-.screen {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  padding-bottom: 96px; /* espaço para a low bar */
-}
+/* Nota: estilos globais (body, .screen, .bottom-nav, etc.)
+   vêm agora de stylehome.css                              */
 
 /* HEADER DO ALUNO */
+/* HEADER DO ALUNO */
 .top.student-top {
-  padding: 16px 18px 10px;
-  background-color: #D8ECFF;
+  width: 100%;
+  max-width: 720px;
+  margin-top: 16px;
+  padding: 16px 20px 12px;
+  background-color: #ffffff;                  /* deixa de ser azul, passa a card branco */
+  border-radius: 18px;
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.08);
 }
 
 .student-id {
@@ -118,11 +22,12 @@ body {
   gap: 12px;
 }
 
+
 .student-avatar {
   width: 44px;
   height: 44px;
   border-radius: 999px;
-  background: #0A67B2;
+  background: var(--blue-main);
   color: #fff;
   display: flex;
   align-items: center;
@@ -143,20 +48,40 @@ body {
 }
 
 /* CONTEÚDO PRINCIPAL */
-.student-main {
-  padding: 10px 16px 20px;
+/* Estrutura */
+.screen {
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  align-items: center;      /* 👉 centra header + main */
+  padding-bottom: 96px;     /* espaço para a low bar */
 }
 
+/* CONTEÚDO PRINCIPAL */
+.student-main {
+  width: 100%;
+  max-width: 720px;         /* 👉 mesma largura para todos os cards */
+  padding: 10px 0 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;                /* distância entre cards */
+}
+
+
+/* Cards genéricos desta página
+   (herdam base de .card do stylehome, se existir) */
 /* Cards genéricos */
 .card {
   background: #ffffff;
   border-radius: 14px;
   padding: 14px 16px;
   box-shadow: 0 8px 18px rgba(15, 23, 42, 0.08);
+  width: 100%;
+  max-width: 720px;         
+  margin: 0 auto;           
 }
+
+
 
 .card-title {
   margin: 0 0 6px;
@@ -173,7 +98,7 @@ body {
 .next-lesson-card .next-lesson-when {
   margin: 4px 0 2px;
   font-weight: 600;
-  color: #0A67B2;
+  color: var(--blue-main);
   font-size: 15px;
 }
 
@@ -201,7 +126,7 @@ body {
   padding: 8px 10px;
   font-size: 13px;
   font-weight: 600;
-  background: #0A67B2;
+  background: var(--blue-main);
   color: #ffffff;
   cursor: pointer;
   box-shadow: 0 4px 0 #0b4e86;
@@ -260,8 +185,8 @@ body {
 /* Ajustes em ecrãs maiores */
 @media (min-width: 480px) {
   .student-main {
-    max-width: 480px;
-    margin: 0 auto 0;
+    max-width: 720px;
+    margin: 0 auto;
     width: 100%;
   }
 }

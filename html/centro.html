@@ -4,6 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Centro de Estudos</title>
+    <link rel="stylesheet" href="../css/stylehome.css" />
+
   <link rel="stylesheet" href="../css/styleCentro.css" />
   <link rel="icon" href="../Back-Office/Gestor/Imagens/Logo.png" type="image/x-icon" />
 </head>
@@ -77,28 +79,32 @@
 
     </main>
 
-    <!-- BOTTOM NAV -->
+    <!-- LOW BAR / NAV INFERIOR -->
     <nav class="bottom-nav">
+      <!-- Conteúdos gerais -->
       <button class="nav-btn" onclick="location.href='conteudos.html'">
         <span class="nav-icon">📚</span>
         <span class="nav-label">Conteúdos</span>
       </button>
 
-      <button class="nav-btn nav-btn-main" onclick="location.href='aluno.html'">
-        <span class="nav-icon">👤</span>
-      </button>
-
-      <button class="nav-btn active" onclick="location.href='centro.html'">
+      <!-- Centro de estudos -->
+      <button class="nav-btn" onclick="location.href='centro.html'">
         <span class="nav-icon">🏫</span>
         <span class="nav-label">Centro</span>
       </button>
 
+      <!-- Perfil do aluno (página atual) -->
+      <button class="nav-btn nav-btn-main active" onclick="location.href='aluno.html'">
+        <span class="nav-icon">👤</span>
+      </button>
+
+      <!-- Mensagens -->
       <button class="nav-btn" onclick="location.href='mensagens.html'">
         <span class="nav-icon">💬</span>
         <span class="nav-label">Mensagens</span>
       </button>
 
-            <!-- Definições -->
+      <!-- Definições -->
       <button class="nav-btn" onclick="location.href='promo.html'">
         <span class="nav-icon">⚙️</span>
         <span class="nav-label">Definições</span>

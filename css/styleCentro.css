@@ -1,129 +1,15 @@
 /* ========================================================= */
-/* ====================  LOW BAR DA APP  ==================== */
+/* ==========  ESTILOS ESPECÍFICOS DA PÁGINA CENTRO ======== */
 /* ========================================================= */
+/* Base global (body, .screen, .bottom-nav, etc.)
+   vem de stylehome.css                                     */
 
-.bottom-nav {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background: #ffeec0;
-  padding: 12px 28px 18px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  z-index: 20;
-  box-sizing: border-box;
-}
-
-.nav-btn {
-  flex: 1;
-  background: none;
-  border: none;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 3px;
-  color: #0b4f8a;
-  font-size: 11px;
-  cursor: pointer;
-  font-family: inherit; /* garante mesma fonte que o body */
-}
-
-.nav-icon {
-  font-size: 20px;
-}
-
-.nav-label {
-  letter-spacing: 0.06em;
-  font-weight: 600;
-  text-transform: uppercase;
-}
-
-/* Botão principal (perfil) ao centro */
-.nav-btn-main {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%) translateY(-26px);
-  width: 70px;
-  height: 70px;
-  border-radius: 999px;
-  background: #ffeec0;
-  border: 6px solid #0b4f8a;
-  box-shadow: 0 6px 14px rgba(0,0,0,0.18);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.nav-btn-main .nav-icon {
-  font-size: 28px;
-}
-
-/* Estado ativo (se quiseres usar) */
-.nav-btn.active .nav-icon,
-.nav-btn.active .nav-label {
-  color: #ff7b2a;
-}
-
-/* Em ecrãs muito pequenos escondemos o texto */
-@media (max-width: 480px) {
-  .nav-label {
-    display: none;
-  }
-}
-
-
-/* ========================================================= */
-/* ==  A PARTIR DAQUI É O CONTEÚDO ESPECÍFICO DESTA PÁGINA == */
-/* ========================================================= */
-
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap');
-
-*, *::before, *::after {
-  box-sizing: border-box;
-}
-
-html {
-  height: 100%;
-  margin: 0;
-  scrollbar-gutter: stable both-edges;
-}
-
-body {
-  height: 100%;
-  margin: 0;
-  font-family: "Poppins", Arial, sans-serif;
-  background: #D8ECFF;          /* azul clarinho */
-  color: #0E1B24;
-  -webkit-font-smoothing: antialiased;
-}
-
-/* Estrutura geral */
-.screen {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  padding-bottom: 100px;         /* espaço para a low bar */
-}
-
-/* HEADER */
-.top {
-  text-align: center;
-  padding: 16px 12px;
-  background-color: #D8ECFF;
-}
-
-.top h1 {
-  margin: 0;
-  font-size: 32px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  color: #0A67B2;
-  font-family: "Comic Sans MS", "Poppins", cursive; /* igual ao LABRATS */
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.15);
-  text-transform: uppercase;
-}
+/* Cabeçalho (usa .top do stylehome para alinhamento) */
+/* Se quiseres algo diferente só no centro, podes usar
+   .top.centro-top no HTML e aqui:                         */
+/*
+.top.centro-top h1 { ... }
+*/
 
 /* CONTEÚDO PRINCIPAL – centrado e com largura limitada */
 .centro-main {
@@ -131,21 +17,32 @@ body {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  max-width: 900px;              /* largura máxima do conteúdo */
-  margin: 0 auto 24px;           /* centra no ecrã */
+  max-width: 900px;
+  margin: 0 auto 24px;
 }
 
-/* CARTÕES GENERICOS */
+/* CARTÕES GENÉRICOS DO CENTRO */
 .card {
   background: #ffffff;
   border-radius: 18px;
   padding: 18px 20px;
-  box-shadow: 0 10px 22px rgba(15, 23, 42, 0.10);
-  /*distância vertical entre cartões*/
+  box-shadow: 0 10px 22px rgba(15, 23, 42, 0.1);
   display: flex;
   flex-direction: column;
   gap: 12px;
   margin-bottom: 12px;
+}
+
+.card h2 {
+  margin: 0 0 4px;
+  font-size: 1.3rem;
+  color: var(--blue-main);
+}
+
+.card p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #3f4d5d;
 }
 
 /* Bloco pedir código */
@@ -169,7 +66,7 @@ body {
   padding: 10px;
   border-radius: 999px;
   border: none;
-  background: #0a67b2;
+  background: var(--blue-main);
   color: white;
   font-weight: 700;
   font-size: 14px;
@@ -205,7 +102,7 @@ body {
 .centro-item {
   padding: 10px 12px;
   border-radius: 10px;
-  background: #0a67b2;
+  background: var(--blue-main);
   color: white;
   font-weight: 600;
   text-align: left;
@@ -216,6 +113,11 @@ body {
   gap: 8px;
   cursor: pointer;
   box-shadow: 0 4px 0 #0b4e86;
+  transition: transform 0.06s ease, opacity 0.15s ease;
+}
+
+.centro-item:hover {
+  opacity: 0.96;
 }
 
 .centro-item:active {
@@ -239,7 +141,7 @@ body {
   width: 42px;
   height: 42px;
   border-radius: 999px;
-  background: #0a67b2;
+  background: var(--blue-main);
   color: white;
   display: flex;
   justify-content: center;
@@ -270,7 +172,7 @@ body {
   margin-top: 4px;
 }
 
-/* Em ecrãs mais pequenos, ajustar um pouco */
+/* Em ecrãs mais pequenos */
 @media (max-width: 480px) {
   .centro-main {
     max-width: 100%;

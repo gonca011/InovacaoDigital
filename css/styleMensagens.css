@@ -1,125 +1,10 @@
 /* ========================================================= */
-/* ====================  LOW BAR DA APP  ==================== */
+/* =========  ESTILOS ESPECÍFICOS DA PÁGINA MENSAGENS ====== */
 /* ========================================================= */
-
-.bottom-nav {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background: #ffeec0;
-  padding: 12px 28px 18px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  z-index: 20;
-  box-sizing: border-box;
-}
-
-.nav-btn {
-  flex: 1;
-  background: none;
-  border: none;
-  outline: none;
-  text-decoration: none;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 3px;
-  font-size: 11px;
-  font-family: inherit;
-  color: #0b4f8a;
-  cursor: pointer;
-}
-
-.nav-icon {
-  font-size: 20px;
-}
-
-.nav-label {
-  letter-spacing: 0.06em;
-  font-weight: 600;
-  text-transform: uppercase;
-}
-
-/* Botão principal — Perfil */
-.nav-btn-main {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%) translateY(-26px);
-  width: 70px;
-  height: 70px;
-  border-radius: 999px;
-  background: #ffeec0;
-  border: 6px solid #0b4f8a;
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.18);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.nav-btn-main .nav-icon {
-  font-size: 28px;
-}
-
-/* Ativo */
-.nav-btn.active .nav-icon,
-.nav-btn.active .nav-label {
-  color: #ff7b2a;
-}
-
-/* Ecrãs pequenos */
-@media (max-width: 480px) {
-  .nav-label {
-    display: none;
-  }
-}
-
-
-/* ========================================================= */
-/* ==  A PARTIR DAQUI É O CONTEÚDO ESPECÍFICO DESTA PÁGINA == */
-/* ========================================================= */
-
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap');
-
-*, *::before, *::after { box-sizing: border-box; }
-html, body { height: 100%; margin: 0; }
-
-html {
-  scrollbar-gutter: stable both-edges;
-}
-
-body {
-  font-family: "Poppins", Arial, Helvetica, sans-serif;
-  background-color: #D8ECFF;
-  color: #0E1B24;
-  -webkit-font-smoothing: antialiased;
-}
-
-.screen {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  padding-bottom: 96px; /* espaço para a low bar */
-}
+/* Base global (body, .screen, .bottom-nav, etc.)
+   vem de stylehome.css                                     */
 
 /* HEADER */
-.top {
-  text-align: center;
-  padding: 16px 12px;
-}
-
-.top h1 {
-  margin: 0;
-  font-size: 32px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  color: #0A67B2;
-  font-family: "Comic Sans MS", "Poppins", cursive;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.15);
-  text-transform: uppercase;
-}
-
 .top-subtitle {
   margin: 4px 0 0;
   font-size: 13px;
@@ -134,7 +19,7 @@ body {
   gap: 14px;
 }
 
-/* Card genérico */
+/* Card genérico de conversa */
 .card {
   background: #ffffff;
   border-radius: 14px;
@@ -161,7 +46,7 @@ body {
   width: 40px;
   height: 40px;
   border-radius: 999px;
-  background: #0A67B2;
+  background: var(--blue-main);
   color: #ffffff;
   display: flex;
   align-items: center;
