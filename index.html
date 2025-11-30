@@ -4,37 +4,114 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Landing Page - LABRATS</title>
+
+  <!-- Fonte -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
   <link rel="stylesheet" href="./Back-Office/Gestor/css/landingPage.css" />
+
   <link rel="icon" href="./Back-Office/Gestor/Imagens/Logo.png" type="image/x-icon" />
 </head>
 <body>
-    <header>
+  <!-- HERO / HEADER -->
+  <header class="hero">
+    <div class="hero-inner">
+      <div class="hero-text">
         <h1>Bem-vindo à LABRATS, a melhor plataforma para Estudantes!</h1>
-    <img src="./Back-Office/Gestor/Imagens/Logo.png" alt="Logo LABRATS" class="header-logo" />
-    </header>
-    <div class="landing-page">
-        <h3>Explore os nossos recursos</h3>
+        <p class="hero-subtitle">
+          Centralize os seus estudos, aceda a recursos interativos e colabore com professores e centros de estudo num só espaço digital.
+        </p>
+        <div class="hero-actions">
+          <a href="./html/aluno.html" class="btn btn-primary">
+            <span class="btn-icon">
+              <!-- Ícone Aluno (chapéu de graduação) -->
+              <svg viewBox="0 0 64 64" aria-hidden="true">
+                <path d="M6 20L32 8l26 12-26 12L6 20z" />
+                <path d="M16 26v10c0 6 7 10 16 10s16-4 16-10V26" />
+              </svg>
+            </span>
+            <span>Sou Aluno</span>
+          </a>
+          <a href="./Back-Office/Gestor/html/Geral.html" class="btn btn-secondary">
+            <span class="btn-icon">
+              <!-- Ícone Professor (quadro) -->
+              <svg viewBox="0 0 64 64" aria-hidden="true">
+                <rect x="8" y="12" width="48" height="30" rx="3" ry="3" />
+                <path d="M20 50h24" />
+                <path d="M24 21h16M24 28h10" />
+              </svg>
+            </span>
+            <span>Sou Professor</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-logo-wrapper">
+        <img
+          src="./Back-Office/Gestor/Imagens/Logo.png"
+          alt="Logo LABRATS"
+          class="header-logo"
+        />
+        <div class="hero-badge">
+          Plataforma educativa digital
+        </div>
+      </div>
     </div>
-    <section class="cards">
-        <a class="card" href="./html/aluno.html" aria-label="Ir para a área do aluno">
-            <div class="card-content">
-                <h3>Aluno</h3>
-                <p>Aceder ao portal do estudante</p>
-            </div>
+  </header>
+
+  <!-- MAIN SECTION -->
+  <main>
+    <section class="section-center">
+      <h2>Explore os nossos recursos</h2>
+      <p class="section-subtitle">
+        Escolha o portal adequado ao seu perfil e descubra tudo o que a LABRATS tem preparado.
+      </p>
+
+      <div class="cards">
+        <!-- CARD ALUNO -->
+        <a class="card fade-in" href="./html/aluno.html" aria-label="Ir para a área do aluno">
+          <div class="card-icon">
+            <!-- Ícone Aluno (chapéu de graduação simplificado) -->
+            <svg viewBox="0 0 64 64" aria-hidden="true">
+              <path d="M6 22L32 10l26 12-26 12L6 22z" />
+              <path d="M18 29v9c0 5.5 6.5 9 14 9s14-3.5 14-9v-9" />
+            </svg>
+          </div>
+          <div class="card-content">
+            <h3>Aluno</h3>
+            <p>Aceder ao portal do estudante e acompanhar o seu progresso.</p>
+          </div>
         </a>
 
-        <a class="card" href="./Back-Office/Gestor/html/Geral.html" aria-label="Ir para o painel geral">
-            <div class="card-content">
-                <h3>Professor</h3>
-                <p>Aceder ao portal do professor</p>
-            </div>
+        <!-- CARD PROFESSOR -->
+        <a class="card fade-in delay-1" href="./Back-Office/Gestor/html/Geral.html" aria-label="Ir para o painel geral">
+          <div class="card-icon">
+            <!-- Ícone Professor (quadro com ponteiro) -->
+            <svg viewBox="0 0 64 64" aria-hidden="true">
+              <rect x="8" y="12" width="48" height="30" rx="3" ry="3" />
+              <path d="M18 50h28" />
+              <path d="M22 22h16M22 29h10" />
+              <path d="M40 38l8 6" />
+            </svg>
+          </div>
+          <div class="card-content">
+            <h3>Professor</h3>
+            <p>Gerir turmas, recursos, avaliações e acompanhar os alunos.</p>
+          </div>
         </a>
+      </div>
     </section>
+  </main>
 
-    <nav class="footer-nav">
-        <ul>
-            <li><a href="./Back-Office/Gestor/html/promo.html">Contacte-nos</a></li>
-        </ul>
-    </nav>
+  <!-- FOOTER -->
+  <footer class="footer-nav">
+    <p>
+      Precisa de ajuda ou quer saber mais sobre a LABRATS?
+      <a href="./Back-Office/Gestor/html/promo.html">Contacte-nos</a>
+    </p>
+  </footer>
 </body>
 </html>
